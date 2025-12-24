@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-  --theme-dark: rgb(2, 6, 23);
+  --theme-dark: #1F2937
+
+  /* --theme-dark: #020617 */
 }
 
 * {
@@ -17,8 +19,6 @@ body {
   color: white;
   overflow-x: hidden;
 }
-
-
 
 .nav-links a {
   color: white;
@@ -62,7 +62,7 @@ body {
 .car-bg { background-image: url('./assets/car.webp'); z-index: 4; animation: skyScroll -3s linear infinite;}
 
 @keyframes carCruise {
-  0%   { background-position: -100 bottom; }
+  0%   { background-position: 0px bottom; }
   
   /* At 30% of the time, the car has traveled 45% of the distance (FAST entry) */
   30%  { background-position: -200px bottom; }
@@ -74,14 +74,23 @@ body {
   100% { background-position: 0px bottom; }
 }
 
+@keyframes carRumble {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-1px); } /* Moves up 2 pixels */
+  100% { transform: translateY(0px); }
+}
+
 /* 2. Apply it to your car class */
 .car-bg { 
   background-image: url('./assets/car.webp'); 
   z-index: 4; 
   
   /* Use the new animation instead of skyScroll */
-  animation: carCruise 8s linear infinite; 
+  animation: 
+    carCruise 8s linear infinite, 
+    carRumble 0.2s steps(2) infinite; 
 }
+
 
 .banner-viewport {      
   position: absolute;
@@ -194,3 +203,41 @@ body {
   display: inline-block;
 }
 
+.profile-card {
+  /* Remove background and borders */
+  background-color: transparent !important;
+  border: none !important;
+  text-align: center;
+  max-width: 800px;
+  
+  /* Ensure it sits on top */
+  position: relative;
+  z-index: 20;
+}
+
+.profile-card h1 {
+  font-size: 3rem; /* Make it bigger */
+  margin-bottom: 20px;
+  
+  /* This creates a hard black outline around the text */
+  text-shadow: 
+    4px 4px 0 #000, 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.profile-card p {
+  font-size: 1rem;
+  text-shadow: 2px 2px 0 #000; /* Slightly smaller shadow */
+}
+
+.system-tag {
+  color: #209cee; /* NES.css blue */
+  margin-bottom: 10px;
+  font-size: 0.8rem !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 #000;
+}

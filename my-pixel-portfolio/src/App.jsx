@@ -1,7 +1,19 @@
 import "nes.css/css/nes.min.css";
 import "./App.css";
+import { useState, useEffect } from 'react'; // <--- ADD THIS
+import "nes.css/css/nes.min.css";
+import "./App.css";
 
 function App() {
+ 
+ const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="app-holder">
       {/* Sticky Navigation Bar */}
@@ -15,9 +27,20 @@ function App() {
       </nav>
 
       <header className="parallax-banner">
-        <div className="layer sky-bg"></div>
-        <div className="layer mountain-bg"></div>
-        <div className="layer hills-bg"></div>
+        <div 
+          className="layer sky-bg" 
+          style={{ transform: `translateY(${scrollY * 0.8}px)` }}
+        ></div>
+
+        <div 
+          className="layer mountain-bg"
+          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+        ></div>
+        
+        <div 
+          className="layer hills-bg"
+          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+        ></div>
         <div className="layer grass-bg"></div>
         <div className="layer car-bg"></div>
 
@@ -28,10 +51,10 @@ function App() {
             alt="mascot" 
           />*/}
           <div className="banner-content">
-            <div className="nes-container is-dark with-title profile-card">
-              <p className="title">SYSTEM_v2.0</p>
+            <div className="profile-card" style={{ transform: `translateY(${scrollY * 0.2}px)` }} >
+              <p className="system-tag">SYSTEM_v2.0</p>
               <h1>ANGAD GHATODE</h1>
-              <p>Full-Stack Developer & AI Architect</p>
+              <p>Junior Software Engineer</p>
             </div>
           </div>
         </div>
@@ -104,11 +127,16 @@ function App() {
         </div>
       </main>
 
+      
+
       <footer className="footer-bar">
         <p>© 2025 ANGAD GHATODE</p>
       </footer>
     </div>
   );
+
+
+  
 }
 
 export default App;
