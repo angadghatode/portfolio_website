@@ -400,3 +400,83 @@ html, body, #root {
   filter: blur(0);
   transform: translateY(0);
 }
+
+/* --- MOBILE OPTIMIZATION (Fixes for Screens under 768px) --- */
+@media (max-width: 768px) {
+  /* 1. Fix the Navigation Bar */
+  .sticky-nav {
+    padding: 0 15px;
+    height: 60px;
+  }
+
+  .nav-brand {
+    font-size: 0.6rem; /* Scale down brand name */
+  }
+
+  .nav-links a {
+    margin-left: 10px;
+    font-size: 0.5rem; /* Tiny links to fit on one row */
+  }
+
+  /* 2. Fix the Parallax Banner Height */
+  .parallax-banner {
+    height: 400px; /* Shorter banner for mobile */
+    margin-top: 50px;
+  }
+
+  /* 3. Fix the Profile Card Text Overflow */
+  .profile-card h1 {
+    font-size: 1.4rem; /* Significantly smaller name */
+    line-height: 1.2;
+    padding: 0 10px;
+    word-break: break-word; /* Ensure name doesn't shoot off screen */
+  }
+
+  .profile-card p {
+    font-size: 0.7rem; /* Smaller subtitle */
+  }
+
+  .system-tag {
+    font-size: 0.5rem !important;
+  }
+
+  /* 4. Center Content & Adjust Grids */
+  .content-width-limiter {
+    width: 90%;
+    padding: 0;
+  }
+
+  .mission-grid {
+    grid-template-columns: 1fr; /* Stack cards vertically */
+  }
+
+  .mission-card {
+    min-width: unset; /* Allow cards to shrink */
+  }
+
+  /* 5. Fix Tech Arsenal Sidebar */
+  .arsenal-layout {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .arsenal-sidebar {
+    border-right: none;
+    border-bottom: 2px dashed var(--border-default);
+    padding-right: 0;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+/* --- SMALL MOBILE (Fixes for screens under 480px) --- */
+@media (max-width: 480px) {
+  .profile-card h1 {
+    font-size: 1.1rem;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 5px;
+  }
+}
