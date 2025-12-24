@@ -19,13 +19,14 @@ function App() {
         <div className="layer mountain-bg"></div>
         <div className="layer hills-bg"></div>
         <div className="layer grass-bg"></div>
+        <div className="layer car-bg"></div>
 
         <div className="banner-viewport">
-          <img 
-            src="https://www.codedex.io/images/homepage/LandingPage_Mascot.webp" 
+          {/* Sticky Navigation Bar <img 
+            src="src\assets\LandingPage_Mascot.webp" 
             className="mascot-img" 
             alt="mascot" 
-          />
+          />*/}
           <div className="banner-content">
             <div className="nes-container is-dark with-title profile-card">
               <p className="title">SYSTEM_v2.0</p>
