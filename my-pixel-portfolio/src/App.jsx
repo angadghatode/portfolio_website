@@ -75,7 +75,7 @@ function App() {
                   <p><span className="status-indicator"></span>Status: ONLINE</p>
                   <p>Building a high-performance retro interface using React, NES.css, and parallax architecture.</p>
                   <div className="card-footer">
-                    <button type="button" className="nes-btn is-primary">ACCESS CODE</button>
+                     {/* Added 'hidden-reveal' to the sections and cards <button type="button" className="nes-btn is-primary">ACCESS CODE</button> */}
                   </div>
                 </div>
               </div>
@@ -87,9 +87,9 @@ function App() {
                 </div>
                 <div className="mission-body">
                   <p><span className="status-indicator"></span>Status: IN PROGRESS</p>
-                  <p>Integrating large language models into web viewports for intelligent UI interactions.</p>
+                  <p>Integrating an Ai Persona into this website!</p>
                   <div className="card-footer">
-                    <button type="button" className="nes-btn is-primary">ACCESS CODE</button>
+                    {/* Added 'hidden-reveal' to the sections and cards <button type="button" className="nes-btn is-primary">ACCESS CODE</button> */}
                   </div>
                 </div>
               </div>
