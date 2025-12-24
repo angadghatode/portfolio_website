@@ -70,10 +70,10 @@ body {
   image-rendering: pixelated;
 }
 
-.sky-bg { background-image: url('https://www.codedex.io/images/homepage/LandingPage_Sky.webp'); z-index: 1; animation: skyScroll 400s linear infinite; }
-.mountain-bg { background-image: url('https://www.codedex.io/images/homepage/LandingPage_Mountain.webp'); z-index: 2; background-position: bottom center;}
-.hills-bg { background-image: url('https://www.codedex.io/images/homepage/LandingPage_Hills.webp'); z-index: 3; background-position: bottom center;}
-.grass-bg { background-image: url('https://www.codedex.io/images/homepage/LandingPage_Grass.webp'); z-index: 4; background-position: bottom center;}
+.sky-bg { background-image: url('./assets/LandingPage_Sky.webp'); z-index: 1; animation: skyScroll 400s linear infinite; }
+.mountain-bg { background-image: url('./assets/LandingPage_Mountain.webp'); z-index: 2; background-position: bottom center;}
+.hills-bg { background-image: url('./assets/LandingPage_Hills.webp'); z-index: 3; background-position: bottom center;}
+.grass-bg { background-image: url('./assets/LandingPage_Grass.webp'); z-index: 4; background-position: bottom center;}
 
 .banner-viewport {
   position: absolute;
@@ -203,7 +203,7 @@ body {
 }
 
 /* --- NON-BOLD SECTION TITLE --- */
-.section-title, h2.nes-text {
+.section-title, h2.nes-text, h1 {
   font-weight: normal !important;
   -webkit-font-smoothing: none;
   font-smooth: never;
