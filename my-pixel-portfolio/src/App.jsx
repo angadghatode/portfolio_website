@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "nes.css/css/nes.min.css";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-holder">
+      <header className="parallax-banner">
+        {/* All background layers now span 100% width */}
+        <div className="layer sky-bg"></div>
+        <div className="layer mountain-bg"></div>
+        <div className="layer hills-bg"></div>
+        <div className="layer grass-bg"></div>
+
+        {/* The viewport now only handles the fixed positioning of the mascot and text */}
+        <div className="banner-viewport">
+          <img 
+            src="https://www.codedex.io/images/homepage/LandingPage_Mascot.webp" 
+            className="mascot-img" 
+            alt="mascot" 
+          />
+
+          <div className="banner-content">
+            <div className="nes-container is-dark with-title profile-card">
+              <p className="title">SYSTEM_v2.0</p>
+              <h1>ANGAD GHATODE</h1>
+              <p>Full-Stack Developer & AI Architect</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="content-area">
+        <div className="content-width-limiter">
+          <section className="quest-section">
+            <h2 className="nes-text is-success">CURRENT QUESTS</h2>
+            <div className="pixel-grid">
+              <div className="nes-container is-dark with-title">
+                <p className="title">Quest 01</p>
+                <p>Building a modern pixel portfolio.</p>
+              </div>
+              <div className="nes-container is-dark with-title">
+                <p className="title">Quest 02</p>
+                <p>Integrating an AI Persona card.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
