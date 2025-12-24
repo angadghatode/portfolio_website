@@ -1,11 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+/* --- 1. THEME VARIABLES (Synthwave Noir) --- */
 :root {
-  --theme-dark: #1F2937
+  /* --- BASE STRUCTURE (The Dark Set) --- */
+  --bg-primary: #020617;     /* Absolute night */
+  --bg-card: #070B1A;        /* Deeper than before */
+  --bg-contrast: #0B122C;    /* Nav / inputs */
 
-  /* --theme-dark: #020617 */
+  /* --- NEON ACCENTS --- */
+  --accent-blue: #38BDF8;    /* Cyan-blue (main action) */
+  --accent-purple: #8B5CF6; /* Neon violet */
+  --accent-pink: #F472B6;   /* Soft neon pink */
+  --accent-cyan: #22D3EE;   /* Energy glow */
+
+  /* --- TEXT --- */
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+
+  /* --- BORDERS & GLOWS --- */
+  --border-default: #1E293B;
+  --border-glow: rgba(139, 92, 246, 0.6);
+
+  /* --- STATUS --- */
+  --status-success: #22C55E;
+  --status-error: #FB7185;    /* Using your PINK for errors/alerts */
 }
 
+/* --- 2. GLOBAL RESETS --- */
 * {
   font-family: 'Press Start 2P', cursive !important;
   margin: 0;
@@ -14,25 +35,123 @@
   scroll-behavior: smooth;
 }
 
-body {
-  background-color: var(--theme-dark);
-  color: white;
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+}
+
+.app-holder {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 3. NES.css OVERRIDES --- */
+
+/* CARD STYLING: The Purple (#3a2d56) */
+.nes-container.is-dark {
+  background-color: var(--bg-card) !important;
+  border-color: var(--accent-soft) !important; /* Lighter blue border */
+  color: var(--text-main) !important;
+}
+
+/* INPUTS: The Deep Red (#461d24) - Adds that unique contrast you liked */
+.nes-input.is-dark, .nes-textarea.is-dark {
+  background-color: var(--bg-contrast) !important; 
+  border-color: var(--accent-soft) !important;
+  color: var(--text-main) !important;
+}
+
+/* BUTTONS: Electric Blue -> Hot Pink Hover */
+.nes-btn.is-primary {
+  background-color: var(--accent-blue) !important;
+  /* Pixel art 3D shadow effect */
+  box-shadow: inset -4px -4px rgba(0, 0, 0, 0.5) !important; 
+  color: white !important;
+}
+
+.nes-btn.is-primary:hover {
+  background-color: var(--accent-pink) !important; /* GLOW UP to Pink */
+  box-shadow: inset -4px -4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* SUCCESS BUTTONS */
+.nes-btn.is-success {
+  background-color: #065f46 !important; /* Deep Emerald */
+  color: #fff !important;
+}
+
+/* BADGES & TAGS */
+.nes-badge span.is-primary { background-color: var(--accent-blue) !important; }
+.nes-badge span.is-success { background-color: var(--status-success) !important; }
+.nes-badge span.is-warning { background-color: var(--accent-pink) !important; }
+.nes-badge span.is-dark    { background-color: var(--bg-contrast) !important; border: 1px solid var(--accent-soft); }
+
+/* TEXT COLORS */
+.nes-text.is-primary { color: var(--accent-soft) !important; }
+.nes-text.is-error   { color: var(--accent-pink) !important; }
+.nes-text.is-success { color: var(--status-success) !important; }
+
+/* --- 4. NAVIGATION --- */
+.sticky-nav {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  
+  /* Using the Deep Red/Brown for the Nav Bar to separate it from the sky */
+  background-color: #020617  !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.nav-brand {
+  color: var(--text-main);
+  text-shadow: 2px 2px 0px var(--accent-blue);
 }
 
 .nav-links a {
-  color: white;
+  color: var(--text-main);
   text-decoration: none;
   margin-left: 30px;
   font-size: 0.7rem;
+  transition: color 0.2s;
 }
 
-.nav-links a:hover { color: #209cee; }
+.nav-links a:hover {
+  color: var(--accent-pink); 
+}
 
-/* --- THE BANNER --- */
+/* --- 5. PARALLAX & ANIMATIONS --- */
 @keyframes skyScroll {
   from { background-position: 0 bottom; }
   to { background-position: -2923px bottom; }
+}
+
+@keyframes carCruise {
+  0%   { background-position: 0px bottom; }
+  30%  { background-position: -200px bottom; }
+  70%  { background-position: 100px bottom; }
+  100% { background-position: 0px bottom; }
+}
+
+@keyframes carRumble {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-1px); } 
+  100% { transform: translateY(0px); }
 }
 
 .parallax-banner {
@@ -40,8 +159,8 @@ body {
   width: 100%;
   height: 650px;
   overflow: hidden;
-  background-color: #74d6fd;
-  margin-top: 60px; /* Offset for sticky nav */
+  background-color: #060455; /* Fallback to your deep blue if sky fails */
+  margin-top: 60px;
 }
 
 .layer {
@@ -55,59 +174,21 @@ body {
   image-rendering: pixelated;
 }
 
-.sky-bg { background-image: url('./assets/Sky.webp'); z-index: 1; animation: skyScroll 600s linear infinite; }
-.mountain-bg { background-image: url('./assets/Mountain.webp'); z-index: 2; animation: skyScroll 100s linear infinite;}
-.hills-bg { background-image: url('./assets/city.webp'); z-index: 3; animation: skyScroll 30s linear infinite;}
-.grass-bg { background-image: url('./assets/Road.webp'); z-index: 4; animation: skyScroll 5s linear infinite;}
-.car-bg { background-image: url('./assets/car.webp'); z-index: 4; animation: skyScroll -3s linear infinite;}
+/* Layer Definitions */
+.sky-bg      { background-image: url('./assets/Sky.webp'); z-index: 1; animation: skyScroll 600s linear infinite; }
+.mountain-bg { background-image: url('./assets/Mountain.webp'); z-index: 2; animation: skyScroll 100s linear infinite; }
+.hills-bg    { background-image: url('./assets/city.webp'); z-index: 3; animation: skyScroll 30s linear infinite; }
+.grass-bg    { background-image: url('./assets/Road.webp'); z-index: 4; animation: skyScroll 5s linear infinite; }
+.car-bg      { background-image: url('./assets/car.webp'); z-index: 4; animation: carCruise 8s linear infinite, carRumble 0.2s steps(2) infinite; }
 
-@keyframes carCruise {
-  0%   { background-position: 0px bottom; }
-  
-  /* At 30% of the time, the car has traveled 45% of the distance (FAST entry) */
-  30%  { background-position: -200px bottom; }
-  
-  /* At 70% of the time, it has only moved a little more to 55% (SLOW middle) */
-  70%  { background-position: 100px bottom; }
-  
-  /* At 100%, it finishes the race (FAST exit) */
-  100% { background-position: 0px bottom; }
-}
-
-@keyframes carRumble {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-1px); } /* Moves up 2 pixels */
-  100% { transform: translateY(0px); }
-}
-
-/* 2. Apply it to your car class */
-.car-bg { 
-  background-image: url('./assets/car.webp'); 
-  z-index: 4; 
-  
-  /* Use the new animation instead of skyScroll */
-  animation: 
-    carCruise 8s linear infinite, 
-    carRumble 0.2s steps(2) infinite; 
-}
-
-
-.banner-viewport {      
+/* Banner Content */
+.banner-viewport {
   position: absolute;
   height: 100%;
   width: 1400px;
-  left: 50%; 
+  left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-}
-
-.mascot-img {
-  position: absolute;
-  z-index: 5;
-  height: 160px;
-  bottom: 70px;
-  left: 100px;
-  image-rendering: pixelated;
 }
 
 .banner-content {
@@ -120,106 +201,21 @@ body {
   justify-content: center;
 }
 
-.profile-card { background-color: rgba(33, 37, 41, 0.9) !important; max-width: 600px; text-align: center; border: 4px solid white !important; }
-
-/* --- CONTENT AREA & SPACING --- */
-.content-area { 
-  background-color: var(--theme-dark); 
-  padding: 150px 0; 
-}
-
-.content-width-limiter { 
-  max-width: 2000px; 
-  margin: 0 auto; 
-  padding: 0 60px; 
-}
-
-.portfolio-section { 
-  margin-bottom: 200px; 
-}
-
-.section-title { 
-  margin-bottom: 60px; 
-  font-size: 1.5rem; 
-}
-
-.pixel-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-  gap: 60px;
-}
-
-.project-card {
-  padding: 30px !important;
-}
-
-.card-footer { margin-top: 30px; }
-
-.skills-list { display: flex; flex-wrap: wrap; gap: 25px; padding: 40px; }
-.contact-box { padding: 50px !important; }
-
-.footer-bar {
-  text-align: center;
-  padding: 80px;
-  background-color: #0b0b14;
-  border-top: 4px solid white;
-}
-
-
-/* --- STICKY NAVIGATION --- */
-.sticky-nav {
-  position: fixed !important; /* Force it to stay fixed */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px; /* Define a height for spacing */
-  z-index: 9999; /* Ensure it is higher than the parallax z-index */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
-  background-color: var(--theme-dark) !important;
-  border-top: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-bottom: 4px solid white !important;
-}
-
-/* Offset the banner so it doesn't start underneath the fixed nav */
-.parallax-banner {
-  margin-top: 60px; /* Adjust this to match your navbar height */
-  position: relative;
-  width: 100%;
-  height: 650px;
-  overflow: hidden;
-}
-
-/* --- NON-BOLD SECTION TITLE --- */
-.section-title, h2.nes-text, h1 {
-  font-weight: normal !important;
-  -webkit-font-smoothing: none;
-  font-smooth: never;
-  text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
-  display: inline-block;
-}
-
+/* --- 6. PROFILE CARD (Transparent) --- */
 .profile-card {
-  /* Remove background and borders */
   background-color: transparent !important;
   border: none !important;
   text-align: center;
   max-width: 800px;
-  
-  /* Ensure it sits on top */
   position: relative;
   z-index: 20;
 }
 
 .profile-card h1 {
-  font-size: 3rem; /* Make it bigger */
+  font-size: 3rem;
   margin-bottom: 20px;
-  
-  /* This creates a hard black outline around the text */
+  color: #fff;
+  /* Heavy black shadow for readability */
   text-shadow: 
     4px 4px 0 #000, 
     -1px -1px 0 #000,  
@@ -230,14 +226,194 @@ body {
 
 .profile-card p {
   font-size: 1rem;
-  text-shadow: 2px 2px 0 #000; /* Slightly smaller shadow */
+  color: var(--text-main);
+  text-shadow: 2px 2px 0 #000;
 }
 
 .system-tag {
-  color: #209cee; /* NES.css blue */
+  color: var(--accent-pink) !important; /* Pink Highlight */
   margin-bottom: 10px;
   font-size: 0.8rem !important;
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: 2px 2px 0 #000;
+}
+
+/* --- 7. MAIN CONTENT --- */
+
+/* The Background: Adds a subtle cyber-grid to the dark void */
+.content-area { 
+  background-color: var(--bg-primary); 
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px; /* Grid size */
+  padding: 100px 0; 
+  position: relative;
+  box-shadow: 0 -20px 50px rgba(56, 189, 248, 0.1); /* Blue glow from top */
+}
+
+/* Widen the container to use the full screen space */
+.content-width-limiter { 
+  max-width: 2000px; /* Increased from 1200px */
+  width: 95%;        /* Takes up 95% of smaller screens */
+  margin: 0 auto; 
+}
+
+/* Section Spacing & Headers */
+.portfolio-section { margin-bottom: 120px; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 50px;
+  border-bottom: 2px solid var(--border-default);
+  padding-bottom: 20px;
+}
+
+.section-title {
+  margin-bottom: 0 !important;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+/* A glowing line decoration next to titles */
+.header-line {
+  flex-grow: 1;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-blue), transparent);
+  box-shadow: 0 0 10px var(--accent-blue);
+}
+
+/* --- A. ACTIVE QUESTS (Projects) --- */
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* Wide cards */
+  gap: 40px;
+}
+
+/* The "Mission Card" look */
+.mission-card {
+  background-color: var(--bg-card) !important;
+  border: 4px solid var(--border-default) !important;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Hover Effect: Border lights up Blue/Pink */
+.mission-card:hover {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 
+    0 0 20px rgba(56, 189, 248, 0.2), 
+    inset 0 0 20px rgba(56, 189, 248, 0.1);
+  transform: translateY(-5px);
+}
+
+.mission-header {
+  background-color: var(--bg-contrast);
+  padding: 20px;
+  border-bottom: 4px solid var(--border-default);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mission-id { color: var(--text-muted); font-size: 0.7rem; }
+.mission-title { color: var(--accent-blue); margin: 0; font-size: 1.2rem; }
+
+.mission-body { padding: 30px; }
+
+/* Status light on the card */
+.status-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--status-success);
+  margin-right: 10px;
+  box-shadow: 0 0 8px var(--status-success);
+}
+
+/* --- B. TECH ARSENAL (Skills) --- */
+.arsenal-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Sidebar info + Main grid */
+  gap: 40px;
+  background-color: var(--bg-card);
+  border: 4px solid var(--border-default);
+  padding: 40px;
+}
+
+.arsenal-sidebar {
+  border-right: 2px dashed var(--border-default);
+  padding-right: 40px;
+}
+
+.arsenal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-content: flex-start;
+}
+
+/* Custom Skill Chips */
+.tech-chip {
+  background-color: var(--bg-contrast);
+  border: 2px solid var(--border-default);
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  color: var(--text-main);
+  transition: 0.2s;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tech-chip:hover {
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+}
+
+/* --- C. TRANSMISSION (Contact) --- */
+.comms-terminal {
+  background-color: #000 !important; /* Pure black terminal screen */
+  border: 4px solid var(--border-default) !important;
+  border-top: 20px solid var(--border-default) !important; /* Thick top bar */
+  padding: 40px !important;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* "REC" blinking light */
+.rec-light {
+  position: absolute;
+  top: -14px;
+  right: 20px;
+  color: var(--status-error);
+  font-size: 0.7rem;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+/* --- 8. FOOTER --- */
+.footer-bar {
+  text-align: center;
+  padding: 80px;
+  background-color: var(--bg-contrast);
+  border-top: 4px solid var(--accent-pink); /* Pink accent at bottom */
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* Responsive Fixes */
+@media (max-width: 1000px) {
+  .mission-grid { grid-template-columns: 1fr; }
+  .arsenal-layout { grid-template-columns: 1fr; border-right: none; }
+  .arsenal-sidebar { border-right: none; border-bottom: 2px dashed var(--border-default); padding-bottom: 30px; margin-bottom: 30px; }
 }

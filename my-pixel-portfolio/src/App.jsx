@@ -1,12 +1,10 @@
 import "nes.css/css/nes.min.css";
 import "./App.css";
-import { useState, useEffect } from 'react'; // <--- ADD THIS
-import "nes.css/css/nes.min.css";
-import "./App.css";
+import { useState, useEffect } from 'react';
+
 
 function App() {
- 
- const [scrollY, setScrollY] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -17,7 +15,7 @@ function App() {
   return (
     <div className="app-holder">
       {/* Sticky Navigation Bar */}
-      <nav className="nes-container is-dark sticky-nav">
+      <nav className="nes-container sticky-nav">
         <div className="nav-brand">ANGAD_v2.0</div>
         <div className="nav-links">
           <a href="#quests">QUESTS</a>
@@ -26,6 +24,7 @@ function App() {
         </div>
       </nav>
 
+      {/* --- PARALLAX HEADER (UNCHANGED) --- */}
       <header className="parallax-banner">
         <div 
           className="layer sky-bg" 
@@ -39,19 +38,14 @@ function App() {
         
         <div 
           className="layer hills-bg"
-          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+          style={{ transform: `translateY(${scrollY * 0.3}px)` }}
         ></div>
         <div className="layer grass-bg"></div>
         <div className="layer car-bg"></div>
 
         <div className="banner-viewport">
-          {/* Sticky Navigation Bar <img 
-            src="src\assets\LandingPage_Mascot.webp" 
-            className="mascot-img" 
-            alt="mascot" 
-          />*/}
           <div className="banner-content">
-            <div className="profile-card" style={{ transform: `translateY(${scrollY * 0.2}px)` }} >
+            <div className="profile-card" style={{ transform: `translateY(${scrollY * 0.2}px)` }}>
               <p className="system-tag">SYSTEM_v2.0</p>
               <h1>ANGAD GHATODE</h1>
               <p>Junior Software Engineer</p>
@@ -60,66 +54,111 @@ function App() {
         </div>
       </header>
 
+      {/* --- MAIN CONTENT (REDESIGNED) --- */}
       <main className="content-area">
         <div className="content-width-limiter">
           
-          {/* Active Quests Section - Manual Entry for Unique Info */}
+          {/* 1. ACTIVE QUESTS (Wide Grid) */}
           <section id="quests" className="portfolio-section">
-            <h2 className="nes-text is-success section-title">ACTIVE QUESTS</h2>
-            <div className="pixel-grid">
+            <div className="section-header">
+              <h2 className="nes-text is-primary section-title">ACTIVE QUESTS</h2>
+              <div className="header-line"></div>
+            </div>
+
+            <div className="mission-grid">
               
-              {/* Project 1 */}
-              <div className="nes-container is-dark with-title project-card">
-                <p className="title">Portfolio v2.0</p>
-                <p>Building a retro-inspired pixel art interface using React and NES.css.</p>
-                <div className="card-footer">
-                  <button type="button" className="nes-btn is-primary">VIEW CODE</button>
+              {/* Mission 01 */}
+              <div className="mission-card">
+                <div className="mission-header">
+                  <h3 className="mission-title">PORTFOLIO_v2.0</h3>
+                  <span className="mission-id">ID: #001</span>
+                </div>
+                <div className="mission-body">
+                  <p><span className="status-indicator"></span>Status: ONLINE</p>
+                  <p>Building a high-performance retro interface using React, NES.css, and parallax architecture.</p>
+                  <div className="card-footer">
+                    <button type="button" className="nes-btn is-primary">ACCESS CODE</button>
+                  </div>
                 </div>
               </div>
 
-              {/* Project 2 */}
-              <div className="nes-container is-dark with-title project-card">
-                <p className="title">AI Architect</p>
-                <p>Integrating large language models into web viewports for intelligent UI.</p>
-                <div className="card-footer">
-                  <button type="button" className="nes-btn is-primary">VIEW CODE</button>
+              {/* Mission 02 */}
+              <div className="mission-card">
+                <div className="mission-header">
+                  <h3 className="mission-title">AI ARCHITECT</h3>
+                  <span className="mission-id">ID: #002</span>
+                </div>
+                <div className="mission-body">
+                  <p><span className="status-indicator"></span>Status: IN PROGRESS</p>
+                  <p>Integrating large language models into web viewports for intelligent UI interactions.</p>
+                  <div className="card-footer">
+                    <button type="button" className="nes-btn is-primary">ACCESS CODE</button>
+                  </div>
                 </div>
               </div>
 
             </div>
           </section>
 
-          {/* Tech Arsenal Section */}
+          {/* 2. TECH ARSENAL (Dashboard Layout) */}
           <section id="skills" className="portfolio-section">
-            <h2 className="nes-text is-warning section-title">TECH ARSENAL</h2>
-            <div className="nes-container is-dark with-title inventory-box">
-              <p className="title">Inventory</p>
-              <div className="skills-list">
-                <span className="nes-badge"><span className="is-success">React</span></span>
-                <span className="nes-badge"><span className="is-warning">Node.js</span></span>
-                <span className="nes-badge"><span className="is-error">Python</span></span>
-                <span className="nes-badge"><span className="is-primary">SQL</span></span>
-                <span className="nes-badge"><span className="is-dark">Docker</span></span>
+            <div className="section-header">
+              <h2 className="nes-text is-warning section-title">TECH ARSENAL</h2>
+              <div className="header-line" style={{ background: 'linear-gradient(90deg, var(--status-warning), transparent)', boxShadow: '0 0 10px var(--status-warning)' }}></div>
+            </div>
+
+            <div className="arsenal-layout">
+              <div className="arsenal-sidebar">
+                <h3 style={{ color: 'var(--accent-purple)', marginBottom: '20px' }}>OPERATOR STATS</h3>
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                  Current loadout optimized for full-stack deployment and AI integration.
+                </p>
+                <br />
+                <p>LEVEL: <span className="nes-text is-success">JUNIOR</span></p>
+                <p>CLASS: <span className="nes-text is-primary">ENGINEER</span></p>
+              </div>
+
+              <div className="arsenal-grid">
+                {/* Tech Chips */}
+                <div className="tech-chip"><i className="nes-icon is-small heart"></i> React.js</div>
+                <div className="tech-chip"><i className="nes-icon is-small coin"></i> Node.js</div>
+                <div className="tech-chip"><i className="nes-icon is-small star"></i> Python</div>
+                <div className="tech-chip">TypeScript</div>
+                <div className="tech-chip">PostgreSQL</div>
+                <div className="tech-chip">Docker</div>
+                <div className="tech-chip">Tailwind</div>
+                <div className="tech-chip">Git Systems</div>
+                <div className="tech-chip">OpenAI API</div>
               </div>
             </div>
           </section>
 
-          {/* Contact Section */}
+          {/* 3. TRANSMISSION (Terminal Style) */}
           <section id="contact" className="portfolio-section">
-            <h2 className="nes-text is-error section-title">SEND A TRANSMISSION</h2>
-            <div className="nes-container is-dark contact-box">
+            <div className="section-header">
+              <h2 className="nes-text is-error section-title">UPLINK</h2>
+              <div className="header-line" style={{ background: 'linear-gradient(90deg, var(--status-error), transparent)', boxShadow: '0 0 10px var(--status-error)' }}></div>
+            </div>
+
+            <div className="comms-terminal">
+              <span className="rec-light">● REC</span>
+              <p style={{ color: 'var(--status-success)', marginBottom: '20px' }}>
+                {">"} ESTABLISHING SECURE CONNECTION...<br/>
+                {">"}READY FOR TRANSMISSION.
+              </p>
+
               <form>
-                <div className="nes-field">
-                  <label htmlFor="name_field">Your Name</label>
-                  <input type="text" id="name_field" className="nes-input is-dark" placeholder="Player 1" />
+                <div className="nes-field is-inline" style={{ marginBottom: '20px' }}>
+                  <label htmlFor="name_field" style={{ color: 'var(--accent-blue)', width: '150px' }}>OPERATOR:</label>
+                  <input type="text" id="name_field" className="nes-input is-dark" placeholder="Enter Name" />
                 </div>
-                <div className="nes-field">
-                  <label htmlFor="textarea_field">Message</label>
-                  <textarea id="textarea_field" className="nes-textarea is-dark" placeholder="Enter transmission..."></textarea>
+                
+                <div className="nes-field" style={{ marginBottom: '20px' }}>
+                  <label htmlFor="textarea_field" style={{ color: 'var(--accent-blue)' }}>DATA PACKET:</label>
+                  <textarea id="textarea_field" className="nes-textarea is-dark" placeholder="Type message here..."></textarea>
                 </div>
-                <div className="form-actions">
-                  <button type="button" className="nes-btn is-success">SEND MESSAGE</button>
-                </div>
+                
+                <button type="button" className="nes-btn is-success" style={{ width: '100%' }}>INITIATE UPLOAD</button>
               </form>
             </div>
           </section>
@@ -127,16 +166,12 @@ function App() {
         </div>
       </main>
 
-      
-
       <footer className="footer-bar">
-        <p>© 2025 ANGAD GHATODE</p>
+        <p>SYSTEM SHUTDOWN // © 2025 ANGAD GHATODE</p>
+        <p>Made and Designed by Angad Ghatode</p>
       </footer>
     </div>
   );
-
-
-  
 }
 
 export default App;
