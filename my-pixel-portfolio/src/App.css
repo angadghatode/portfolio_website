@@ -1,32 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-/* --- 1. THEME VARIABLES (Synthwave Noir) --- */
 :root {
-  /* --- BASE STRUCTURE (The Dark Set) --- */
-  --bg-primary: #020617;     /* Absolute night */
-  --bg-card: #070B1A;        /* Deeper than before */
-  --bg-contrast: #0B122C;    /* Nav / inputs */
+  --bg-primary: #020617;    
+  --bg-card: #070B1A;        
+  --bg-contrast: #0B122C; 
 
-  /* --- NEON ACCENTS --- */
-  --accent-blue: #38BDF8;    /* Cyan-blue (main action) */
-  --accent-purple: #8B5CF6; /* Neon violet */
-  --accent-pink: #F472B6;   /* Soft neon pink */
-  --accent-cyan: #22D3EE;   /* Energy glow */
+  --accent-blue: #38BDF8;   
+  --accent-purple: #8B5CF6; 
+  --accent-pink: #F472B6;   
+  --accent-cyan: #22D3EE;  
 
-  /* --- TEXT --- */
   --text-main: #F8FAFC;
   --text-muted: #94A3B8;
 
-  /* --- BORDERS & GLOWS --- */
   --border-default: #1E293B;
   --border-glow: rgba(139, 92, 246, 0.6);
 
-  /* --- STATUS --- */
   --status-success: #22C55E;
-  --status-error: #FB7185;    /* Using your PINK for errors/alerts */
+  --status-error: #FB7185;    
 }
 
-/* --- 2. GLOBAL RESETS --- */
 * {
   font-family: 'Press Start 2P', cursive !important;
   margin: 0;
@@ -52,53 +45,44 @@ html, body, #root {
   flex-direction: column;
 }
 
-/* --- 3. NES.css OVERRIDES --- */
 
-/* CARD STYLING: The Purple (#3a2d56) */
 .nes-container.is-dark {
   background-color: var(--bg-card) !important;
-  border-color: var(--accent-soft) !important; /* Lighter blue border */
+  border-color: var(--accent-soft) !important; 
   color: var(--text-main) !important;
 }
 
-/* INPUTS: The Deep Red (#461d24) - Adds that unique contrast you liked */
 .nes-input.is-dark, .nes-textarea.is-dark {
   background-color: var(--bg-contrast) !important; 
   border-color: var(--accent-soft) !important;
   color: var(--text-main) !important;
 }
 
-/* BUTTONS: Electric Blue -> Hot Pink Hover */
 .nes-btn.is-primary {
   background-color: var(--accent-blue) !important;
-  /* Pixel art 3D shadow effect */
   box-shadow: inset -4px -4px rgba(0, 0, 0, 0.5) !important; 
   color: white !important;
 }
 
 .nes-btn.is-primary:hover {
-  background-color: var(--accent-pink) !important; /* GLOW UP to Pink */
+  background-color: var(--accent-pink) !important; 
   box-shadow: inset -4px -4px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* SUCCESS BUTTONS */
 .nes-btn.is-success {
-  background-color: #065f46 !important; /* Deep Emerald */
+  background-color: #065f46 !important; 
   color: #fff !important;
 }
 
-/* BADGES & TAGS */
 .nes-badge span.is-primary { background-color: var(--accent-blue) !important; }
 .nes-badge span.is-success { background-color: var(--status-success) !important; }
 .nes-badge span.is-warning { background-color: var(--accent-pink) !important; }
 .nes-badge span.is-dark    { background-color: var(--bg-contrast) !important; border: 1px solid var(--accent-soft); }
 
-/* TEXT COLORS */
 .nes-text.is-primary { color: var(--accent-soft) !important; }
 .nes-text.is-error   { color: var(--accent-pink) !important; }
 .nes-text.is-success { color: var(--status-success) !important; }
 
-/* --- 4. NAVIGATION --- */
 .sticky-nav {
   position: fixed !important;
   top: 0;
@@ -111,7 +95,6 @@ html, body, #root {
   align-items: center;
   padding: 0 40px;
   
-  /* Using the Deep Red/Brown for the Nav Bar to separate it from the sky */
   background-color: #020617  !important;
   border-top: none !important;
   border-left: none !important;
@@ -135,7 +118,6 @@ html, body, #root {
   color: var(--accent-pink); 
 }
 
-/* --- 5. PARALLAX & ANIMATIONS --- */
 @keyframes skyScroll {
   from { background-position: 0 bottom; }
   to { background-position: -2923px bottom; }
@@ -159,7 +141,7 @@ html, body, #root {
   width: 100%;
   height: 650px;
   overflow: hidden;
-  background-color: #060455; /* Fallback to your deep blue if sky fails */
+  background-color: #060455;
   margin-top: 60px;
 }
 
@@ -174,14 +156,12 @@ html, body, #root {
   image-rendering: pixelated;
 }
 
-/* Layer Definitions */
 .sky-bg      { background-image: url('./assets/Sky.webp'); z-index: 1; animation: skyScroll 600s linear infinite; }
 .mountain-bg { background-image: url('./assets/Mountain.webp'); z-index: 2; animation: skyScroll 100s linear infinite; }
 .hills-bg    { background-image: url('./assets/city.webp'); z-index: 3; animation: skyScroll 30s linear infinite; }
 .grass-bg    { background-image: url('./assets/Road.webp'); z-index: 4; animation: skyScroll 5s linear infinite; }
 .car-bg      { background-image: url('./assets/car.webp'); z-index: 4; animation: carCruise 8s linear infinite, carRumble 0.2s steps(2) infinite; }
 
-/* Banner Content */
 .banner-viewport {
   position: absolute;
   height: 100%;
@@ -201,7 +181,6 @@ html, body, #root {
   justify-content: center;
 }
 
-/* --- 6. PROFILE CARD (Transparent) --- */
 .profile-card {
   background-color: transparent !important;
   border: none !important;
@@ -215,7 +194,6 @@ html, body, #root {
   font-size: 3rem;
   margin-bottom: 20px;
   color: #fff;
-  /* Heavy black shadow for readability */
   text-shadow: 
     4px 4px 0 #000, 
     -1px -1px 0 #000,  
@@ -231,7 +209,7 @@ html, body, #root {
 }
 
 .system-tag {
-  color: var(--accent-pink) !important; /* Pink Highlight */
+  color: var(--accent-pink) !important;
   margin-bottom: 10px;
   font-size: 0.8rem !important;
   text-transform: uppercase;
@@ -239,28 +217,23 @@ html, body, #root {
   text-shadow: 2px 2px 0 #000;
 }
 
-/* --- 7. MAIN CONTENT --- */
-
-/* The Background: Adds a subtle cyber-grid to the dark void */
 .content-area { 
   background-color: var(--bg-primary); 
   background-image: 
     linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px; /* Grid size */
+  background-size: 40px 40px; 
   padding: 100px 0; 
   position: relative;
-  box-shadow: 0 -20px 50px rgba(56, 189, 248, 0.1); /* Blue glow from top */
+  box-shadow: 0 -20px 50px rgba(56, 189, 248, 0.1); 
 }
 
-/* Widen the container to use the full screen space */
 .content-width-limiter { 
-  max-width: 2000px; /* Increased from 1200px */
-  width: 95%;        /* Takes up 95% of smaller screens */
+  max-width: 2000px; 
+  width: 95%;       
   margin: 0 auto; 
 }
 
-/* Section Spacing & Headers */
 .portfolio-section { margin-bottom: 120px; }
 
 .section-header {
@@ -279,7 +252,6 @@ html, body, #root {
   letter-spacing: -1px;
 }
 
-/* A glowing line decoration next to titles */
 .header-line {
   flex-grow: 1;
   height: 4px;
@@ -287,14 +259,12 @@ html, body, #root {
   box-shadow: 0 0 10px var(--accent-blue);
 }
 
-/* --- A. ACTIVE QUESTS (Projects) --- */
 .mission-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* Wide cards */
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
   gap: 40px;
 }
 
-/* The "Mission Card" look */
 .mission-card {
   background-color: var(--bg-card) !important;
   border: 4px solid var(--border-default) !important;
@@ -303,7 +273,6 @@ html, body, #root {
   overflow: hidden;
 }
 
-/* Hover Effect: Border lights up Blue/Pink */
 .mission-card:hover {
   border-color: var(--accent-blue) !important;
   box-shadow: 
@@ -326,7 +295,6 @@ html, body, #root {
 
 .mission-body { padding: 30px; }
 
-/* Status light on the card */
 .status-indicator {
   display: inline-block;
   width: 12px;
@@ -336,10 +304,10 @@ html, body, #root {
   box-shadow: 0 0 8px var(--status-success);
 }
 
-/* --- B. TECH ARSENAL (Skills) --- */
+
 .arsenal-layout {
   display: grid;
-  grid-template-columns: 1fr 2fr; /* Sidebar info + Main grid */
+  grid-template-columns: 1fr 2fr; 
   gap: 40px;
   background-color: var(--bg-card);
   border: 4px solid var(--border-default);
@@ -358,7 +326,6 @@ html, body, #root {
   align-content: flex-start;
 }
 
-/* Custom Skill Chips */
 .tech-chip {
   background-color: var(--bg-contrast);
   border: 2px solid var(--border-default);
@@ -378,18 +345,18 @@ html, body, #root {
   box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
 }
 
-/* --- C. TRANSMISSION (Contact) --- */
+
 .comms-terminal {
-  background-color: #000 !important; /* Pure black terminal screen */
+  background-color: #000 !important; 
   border: 4px solid var(--border-default) !important;
-  border-top: 20px solid var(--border-default) !important; /* Thick top bar */
+  border-top: 20px solid var(--border-default) !important; 
   padding: 40px !important;
   max-width: 900px;
   margin: 0 auto;
   position: relative;
 }
 
-/* "REC" blinking light */
+
 .rec-light {
   position: absolute;
   top: -14px;
@@ -401,19 +368,35 @@ html, body, #root {
 
 @keyframes blink { 50% { opacity: 0; } }
 
-/* --- 8. FOOTER --- */
+
 .footer-bar {
   text-align: center;
   padding: 80px;
   background-color: var(--bg-contrast);
-  border-top: 4px solid var(--accent-pink); /* Pink accent at bottom */
+  border-top: 4px solid var(--accent-pink); 
   color: var(--text-muted);
   font-size: 0.8rem;
 }
 
-/* Responsive Fixes */
 @media (max-width: 1000px) {
   .mission-grid { grid-template-columns: 1fr; }
   .arsenal-layout { grid-template-columns: 1fr; border-right: none; }
   .arsenal-sidebar { border-right: none; border-bottom: 2px dashed var(--border-default); padding-bottom: 30px; margin-bottom: 30px; }
+}
+
+
+.hidden-reveal {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(50px);
+  transition: all 0.8s ease-out; 
+}
+
+.mission-card:nth-child(2) { transition-delay: 200ms; }
+.mission-card:nth-child(3) { transition-delay: 400ms; }
+
+.hidden-reveal.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
 }
