@@ -149,6 +149,7 @@ function App() {
 
       <footer className="footer-bar">
         <p>SYSTEM SHUTDOWN // © 2025 ANGAD GHATODE</p>
+        <p>Made and Designed by Angad Ghatode</p>
       </footer>
     </div>
   );
