@@ -3,6 +3,7 @@ import "./App.css";
 import { useState, useEffect } from 'react';
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -30,10 +31,19 @@ function App() {
     <div className="app-holder">
       <nav className="nes-container sticky-nav">
         <div className="nav-brand">ANGAD_v2.0</div>
-        <div className="nav-links">
-          <a href="#quests">QUESTS</a>
-          <a href="#skills">SKILLS</a>
-          <a href="#contact">CONTACT</a>
+        {/* Hamburger Button - Only visible on mobile */}
+        <button 
+          type="button" 
+          className="nes-btn is-primary menu-toggle-btn" 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? "X" : "≡"}
+        </button>
+
+        <div className={`nav-links ${isMenuOpen ? "open" : ""}`}>
+          <a href="#quests" onClick={() => setIsMenuOpen(false)}>QUESTS</a>
+          <a href="#skills" onClick={() => setIsMenuOpen(false)}>SKILLS</a>
+          <a href="#contact" onClick={() => setIsMenuOpen(false)}>CONTACT</a>
         </div>
       </nav>
 
@@ -48,7 +58,7 @@ function App() {
           <div className="banner-content">
             <div className="profile-card" style={{ transform: `translateY(${scrollY * 0.2}px)` }}>
               <p className="system-tag">SYSTEM_v2.0</p>
-              <h1>ANGAD GHATODE</h1>
+              <h1 className="profile-card">ANGAD GHATODE</h1>
               <p>Junior Software Engineer</p>
             </div>
           </div>

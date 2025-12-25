@@ -4,24 +4,24 @@
   --bg-primary: #020617;    
   --bg-card: #070B1A;        
   --bg-contrast: #0B122C; 
-
   --accent-blue: #38BDF8;   
   --accent-purple: #8B5CF6; 
   --accent-pink: #F472B6;   
-  --accent-cyan: #22D3EE;  
-
+  --accent-cyan: #22D3EE;   
   --text-main: #F8FAFC;
   --text-muted: #94A3B8;
-
   --border-default: #1E293B;
   --border-glow: rgba(139, 92, 246, 0.6);
-
   --status-success: #22C55E;
   --status-error: #FB7185;    
 }
 
 * {
   font-family: 'Press Start 2P', cursive !important;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
+  text-rendering: optimizeSpeed;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -31,8 +31,6 @@
 html, body, #root {
   width: 100%;
   min-height: 100vh;
-  margin: 0;
-  padding: 0;
   overflow-x: hidden;
   background-color: var(--bg-primary);
   color: var(--text-main);
@@ -45,16 +43,15 @@ html, body, #root {
   flex-direction: column;
 }
 
-
 .nes-container.is-dark {
   background-color: var(--bg-card) !important;
-  border-color: var(--accent-soft) !important; 
+  border-color: var(--border-default) !important; 
   color: var(--text-main) !important;
 }
 
 .nes-input.is-dark, .nes-textarea.is-dark {
   background-color: var(--bg-contrast) !important; 
-  border-color: var(--accent-soft) !important;
+  border-color: var(--border-default) !important;
   color: var(--text-main) !important;
 }
 
@@ -66,7 +63,6 @@ html, body, #root {
 
 .nes-btn.is-primary:hover {
   background-color: var(--accent-pink) !important; 
-  box-shadow: inset -4px -4px rgba(0, 0, 0, 0.5) !important;
 }
 
 .nes-btn.is-success {
@@ -74,13 +70,25 @@ html, body, #root {
   color: #fff !important;
 }
 
+.custom-pixel-btn {
+  background-color: #F472B6 !important;
+  color: #212529 !important;
+  box-shadow: 0 5px 0 #F472B6;
+  transition: all 0.1s;
+}
+
+.custom-pixel-btn:active {
+  box-shadow: 0 2px 0 #F472B6;
+  transform: translateY(3px);
+}
+
 .nes-badge span.is-primary { background-color: var(--accent-blue) !important; }
 .nes-badge span.is-success { background-color: var(--status-success) !important; }
 .nes-badge span.is-warning { background-color: var(--accent-pink) !important; }
-.nes-badge span.is-dark    { background-color: var(--bg-contrast) !important; border: 1px solid var(--accent-soft); }
+.nes-badge span.is-dark { background-color: var(--bg-contrast) !important; }
 
-.nes-text.is-primary { color: var(--accent-soft) !important; }
-.nes-text.is-error   { color: var(--accent-pink) !important; }
+.nes-text.is-primary { color: var(--accent-blue) !important; }
+.nes-text.is-error { color: var(--accent-pink) !important; }
 .nes-text.is-success { color: var(--status-success) !important; }
 
 .sticky-nav {
@@ -88,22 +96,24 @@ html, body, #root {
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 60px;
   z-index: 9999;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 40px;
-  
-  background-color: #020617  !important;
-  border-top: none !important;
-  border-left: none !important;
-  border-right: none !important;
+  background-color: var(--bg-primary) !important;
+  border: none !important;
 }
 
 .nav-brand {
   color: var(--text-main);
   text-shadow: 2px 2px 0px var(--accent-blue);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links a {
@@ -118,22 +128,39 @@ html, body, #root {
   color: var(--accent-pink); 
 }
 
-@keyframes skyScroll {
-  from { background-position: 0 bottom; }
-  to { background-position: -2923px bottom; }
+.menu-toggle {
+  display: none;
+  height: 45px;
+  width: 45px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-pink) !important;
+  color: white !important;
+  border: none;
+  cursor: pointer;
 }
 
-@keyframes carCruise {
-  0%   { background-position: 0px bottom; }
-  30%  { background-position: -200px bottom; }
-  70%  { background-position: 100px bottom; }
-  100% { background-position: 0px bottom; }
+.menu-toggle-btn {
+  display: none; /* Hidden on desktop */
+  padding: 5px 10px !important;
+  background-color: var(--accent-pink) !important;
+  border-color: #000 !important;
+  margin-left: auto;
+  height: 45px;
+  width: 55px;
+  justify-content: center;
+  align-items: center;
+  
 }
 
-@keyframes carRumble {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-1px); } 
-  100% { transform: translateY(0px); }
+
+@media (max-width: 768px) {
+  .menu-toggle-btn {
+    display: flex !important;
+  }
+}
+.menu-toggle-btn .nes-icon.menu::before {
+  color: white !important;
 }
 
 .parallax-banner {
@@ -156,16 +183,17 @@ html, body, #root {
   image-rendering: pixelated;
 }
 
-.sky-bg      { background-image: url('./assets/Sky.webp'); z-index: 1; animation: skyScroll 600s linear infinite; }
+.sky-bg { background-image: url('./assets/Sky.webp'); z-index: 1; animation: skyScroll 600s linear infinite; }
 .mountain-bg { background-image: url('./assets/Mountain.webp'); z-index: 2; animation: skyScroll 100s linear infinite; }
-.hills-bg    { background-image: url('./assets/city.webp'); z-index: 3; animation: skyScroll 30s linear infinite; }
-.grass-bg    { background-image: url('./assets/Road.webp'); z-index: 4; animation: skyScroll 5s linear infinite; }
-.car-bg      { background-image: url('./assets/car.webp'); z-index: 4; animation: carCruise 8s linear infinite, carRumble 0.2s steps(2) infinite; }
+.hills-bg { background-image: url('./assets/city.webp'); z-index: 3; animation: skyScroll 30s linear infinite; }
+.grass-bg { background-image: url('./assets/Road.webp'); z-index: 4; animation: skyScroll 5s linear infinite; }
+.car-bg { background-image: url('./assets/car.webp'); z-index: 4; animation: carCruise 8s linear infinite, carRumble 0.2s steps(2) infinite; }
 
 .banner-viewport {
   position: absolute;
   height: 100%;
-  width: 1400px;
+  width: 100%;
+  max-width: 1400px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -186,7 +214,6 @@ html, body, #root {
   border: none !important;
   text-align: center;
   max-width: 800px;
-  position: relative;
   z-index: 20;
 }
 
@@ -194,12 +221,7 @@ html, body, #root {
   font-size: 3rem;
   margin-bottom: 20px;
   color: #fff;
-  text-shadow: 
-    4px 4px 0 #000, 
-    -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+  text-shadow: 4px 4px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .profile-card p {
@@ -219,9 +241,7 @@ html, body, #root {
 
 .content-area { 
   background-color: var(--bg-primary); 
-  background-image: 
-    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
   background-size: 40px 40px; 
   padding: 100px 0; 
   position: relative;
@@ -275,9 +295,7 @@ html, body, #root {
 
 .mission-card:hover {
   border-color: var(--accent-blue) !important;
-  box-shadow: 
-    0 0 20px rgba(56, 189, 248, 0.2), 
-    inset 0 0 20px rgba(56, 189, 248, 0.1);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2), inset 0 0 20px rgba(56, 189, 248, 0.1);
   transform: translateY(-5px);
 }
 
@@ -292,7 +310,6 @@ html, body, #root {
 
 .mission-id { color: var(--text-muted); font-size: 0.7rem; }
 .mission-title { color: var(--accent-blue); margin: 0; font-size: 1.2rem; }
-
 .mission-body { padding: 30px; }
 
 .status-indicator {
@@ -303,7 +320,6 @@ html, body, #root {
   margin-right: 10px;
   box-shadow: 0 0 8px var(--status-success);
 }
-
 
 .arsenal-layout {
   display: grid;
@@ -322,21 +338,23 @@ html, body, #root {
 .arsenal-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 12px; /* Smaller gap for "little" feel */
+  justify-content: flex-start;
   align-content: flex-start;
 }
 
 .tech-chip {
   background-color: var(--bg-contrast);
   border: 2px solid var(--border-default);
-  padding: 10px 20px;
-  font-size: 0.8rem;
+  padding: 6px 12px; /* Reduced padding for smaller size */
+  font-size: 1rem;  /* Smaller font for the mini look */
   color: var(--text-main);
   transition: 0.2s;
-  cursor: default;
-  display: flex;
+  display: inline-flex; /* Ensures they only take up as much space as text needs */
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  width: auto; /* Prevents stretching */
+  height: auto; /* Prevents stretching */
 }
 
 .tech-chip:hover {
@@ -344,7 +362,6 @@ html, body, #root {
   color: var(--accent-purple);
   box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
 }
-
 
 .comms-terminal {
   background-color: #000 !important; 
@@ -356,7 +373,6 @@ html, body, #root {
   position: relative;
 }
 
-
 .rec-light {
   position: absolute;
   top: -14px;
@@ -365,9 +381,6 @@ html, body, #root {
   font-size: 0.7rem;
   animation: blink 1s infinite;
 }
-
-@keyframes blink { 50% { opacity: 0; } }
-
 
 .footer-bar {
   text-align: center;
@@ -378,13 +391,6 @@ html, body, #root {
   font-size: 0.8rem;
 }
 
-@media (max-width: 1000px) {
-  .mission-grid { grid-template-columns: 1fr; }
-  .arsenal-layout { grid-template-columns: 1fr; border-right: none; }
-  .arsenal-sidebar { border-right: none; border-bottom: 2px dashed var(--border-default); padding-bottom: 30px; margin-bottom: 30px; }
-}
-
-
 .hidden-reveal {
   opacity: 0;
   filter: blur(5px);
@@ -392,91 +398,87 @@ html, body, #root {
   transition: all 0.8s ease-out; 
 }
 
-.mission-card:nth-child(2) { transition-delay: 200ms; }
-.mission-card:nth-child(3) { transition-delay: 400ms; }
-
 .hidden-reveal.show {
   opacity: 1;
   filter: blur(0);
   transform: translateY(0);
 }
 
-/* --- MOBILE OPTIMIZATION (Fixes for Screens under 768px) --- */
+.mission-card:nth-child(2) { transition-delay: 200ms; }
+.mission-card:nth-child(3) { transition-delay: 400ms; }
+
+@keyframes skyScroll { from { background-position: 0 bottom; } to { background-position: -2923px bottom; } }
+@keyframes carCruise { 0%, 100% { background-position: 0px bottom; } 30% { background-position: -200px bottom; } 70% { background-position: 100px bottom; } }
+@keyframes carRumble { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-1px); } }
+@keyframes blink { 50% { opacity: 0; } }
+
+@media (max-width: 1000px) {
+  .mission-grid { grid-template-columns: 1fr; }
+  .arsenal-layout { grid-template-columns: 1fr; }
+  .arsenal-sidebar { border-right: none; border-bottom: 2px dashed var(--border-default); padding-right: 0; padding-bottom: 30px; margin-bottom: 30px; }
+}
+
 @media (max-width: 768px) {
-  /* 1. Fix the Navigation Bar */
-  .sticky-nav {
-    padding: 0 15px;
-    height: 60px;
-  }
-
-  .nav-brand {
-    font-size: 0.6rem; /* Scale down brand name */
-  }
-
-  .nav-links a {
-    margin-left: 10px;
-    font-size: 0.5rem; /* Tiny links to fit on one row */
-  }
-
-  /* 2. Fix the Parallax Banner Height */
-  .parallax-banner {
-    height: 400px; /* Shorter banner for mobile */
-    margin-top: 50px;
-  }
-
-  /* 3. Fix the Profile Card Text Overflow */
-  .profile-card h1 {
-    font-size: 1.4rem; /* Significantly smaller name */
-    line-height: 1.2;
-    padding: 0 10px;
-    word-break: break-word; /* Ensure name doesn't shoot off screen */
-  }
-
-  .profile-card p {
-    font-size: 0.7rem; /* Smaller subtitle */
-  }
-
-  .system-tag {
-    font-size: 0.5rem !important;
-  }
-
-  /* 4. Center Content & Adjust Grids */
-  .content-width-limiter {
-    width: 90%;
-    padding: 0;
-  }
-
-  .mission-grid {
-    grid-template-columns: 1fr; /* Stack cards vertically */
-  }
-
-  .mission-card {
-    min-width: unset; /* Allow cards to shrink */
-  }
-
-  /* 5. Fix Tech Arsenal Sidebar */
-  .arsenal-layout {
-    grid-template-columns: 1fr;
+  .sticky-nav { height: 80px; padding: 10px 20px; }
+  .nav-brand { font-size: 1rem !important; flex-shrink: 0; }
+  .menu-toggle { display: flex; margin-left: auto; }
+  
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #212529;
     padding: 20px;
+    border-bottom: 4px solid #fff;
   }
+  .nav-links.open { display: flex; }
+  .nav-links a { margin: 10px 0; font-size: 1rem; }
 
-  .arsenal-sidebar {
-    border-right: none;
-    border-bottom: 2px dashed var(--border-default);
-    padding-right: 0;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+  .parallax-banner { height: 400px; margin-top: 50px; }
+  .profile-card h1 { font-size: 2rem !important; line-height: 1.1; margin-bottom: 10px; width: 100%; }
+  .profile-card p { font-size: 1rem; }
+  .system-tag { font-size: 0.5rem !important; }
+
+  .content-width-limiter { width: 90%; }
+  .section-title { font-size: 1.2rem !important; }
+  
+  .arsenal-layout { padding: 20px; align-items: flex-start; }
+  .arsenal-grid {
+    display: flex; /* Changed from grid back to flex */
+    justify-content: center; /* Centers the small chips on mobile */
+    gap: 10px;
+  }
+  .tech-chip {
+    padding: 10px 10px;
+    font-size: 1rem;
+    width: auto; /* Ensure they don't take full width on mobile */
   }
 }
 
-/* --- SMALL MOBILE (Fixes for screens under 480px) --- */
 @media (max-width: 480px) {
-  .profile-card h1 {
-    font-size: 1.1rem;
+  .profile-card h1 { font-size: 2rem !important; }
+}
+
+@media (max-width: 768px) {
+  .car-bg {
+    animation: carCruiseMobile 8s linear infinite, carRumble 0.2s steps(2) infinite !important;
   }
-  
-  .nav-links {
-    display: flex;
-    gap: 5px;
+
+  /* 2. New animation specifically for the mobile viewport */
+  @keyframes carCruiseMobile {
+    0%   { background-position: 35% bottom; }
+    30%  { background-position: 30% bottom; }
+    70%  { background-position: 25% bottom; }
+    100% { background-position: 35% bottom; }
+  }
+}
+
+@media (max-width: 768px) {
+  @keyframes carCruise {
+    0%, 100% { background-position: left 10% bottom; }
+    50% { background-position: left 15% bottom; }
   }
 }
