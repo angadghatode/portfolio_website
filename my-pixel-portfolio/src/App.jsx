@@ -24,6 +24,20 @@ function ScrollToTopAndReveal() {
 }
 
 function App() {
+  const [chatHistory, setChatHistory] = useState([
+  { 
+    role: 'ai', 
+    text: "Uplink Successful. Connection to Core_v2.0 established." 
+  },
+  { 
+    role: 'ai', 
+    text: "I am the AI Persona of Angad Ghatode." 
+  },
+  { 
+    role: 'ai', 
+    text: "I've been programmed with his technical expertise and project data. You may ask me anything about his work, skills, or experience." 
+  }
+]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
@@ -112,7 +126,8 @@ function App() {
                   </div>
                   <div className="arsenal-layout">
                     <div className="arsenal-sidebar">
-                      <h3 style={{ color: 'var(--accent-purple)', marginBottom: '20px' }}>OPERATOR STATS</h3>
+                      <h3 style={{ color: 'var(--accent-purple)', marginBottom: '10px' }}>OPERATOR STATS</h3>
+                      <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '40px' }}>Loadout optimized for full-stack deployment.</p>
                       <p>LEVEL: <span className="nes-text is-success">JUNIOR</span></p>
                       <p>CLASS: <span className="nes-text is-primary">ENGINEER</span></p>
                     </div>
@@ -153,7 +168,8 @@ function App() {
               </div>
             </main>
           } />
-          <Route path="/ai" element={<AiTerminal />} />
+          <Route path="/ai" element={<AiTerminal messages={chatHistory} 
+              setMessages={setChatHistory}/>} />
         </Routes>
 
         {/* 4. PERSISTENT FOOTER */}

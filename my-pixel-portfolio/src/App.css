@@ -107,8 +107,10 @@ html, body, #root {
 }
 
 .nav-brand {
+  font-size: 1.2rem;
   color: var(--text-main);
   text-shadow: 2px 2px 0px var(--accent-blue);
+  text-decoration: none;
 }
 
 .nav-links {
@@ -516,13 +518,32 @@ html, body, #root {
 .portrait-container {
   width: 100%;
   height: 200px;
-  background: #000;
-  border: 4px solid var(--accent-pink);
-  margin-bottom: 10px;
+  background: var(--bg-contrast) !important;
+  border: 4px solid var(--accent-cyan);
+  margin-bottom: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
   image-rendering: pixelated;
+}
+.ai-portrait {
+  /* Scale the image up slightly (1.1 = 110%) */
+  /* This grows the image by a few pixels without breaking the layout */
+  transform: scale(1.3); 
+  width: 145px;
+  height: 145px;
+  image-rendering: pixelated;
+  display: block;
+  background: transparent;
+}
+
+.portrait-name {
+  margin-top: 1px;
+  font-size: 1rem;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 .pixel-portrait-placeholder {
@@ -536,7 +557,7 @@ html, body, #root {
   padding: 15px;
   display: flex;
   flex-direction: column;
-  height: 718px;
+  height: 770px;
   position: relative;
 }
 
@@ -569,7 +590,7 @@ html, body, #root {
 .pixel-speech-bubble {
   position: relative;
   padding: 12px 18px;
-  font-size: 0.7rem;
+  font-size: 1rem;
   max-width: 85%;
   border: 4px solid #fff;
   background: var(--bg-contrast);

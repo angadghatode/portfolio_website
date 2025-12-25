@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
+import portraitImg from './assets/portrait.webp';
 
-const AiTerminal = () => {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [isTyping, setIsTyping] = useState(false);
-    const [messages, setMessages] = useState([
-    { role: 'ai', text: 'System uplink established. Core_v2.0 ready.' }
-  ]);
+const AiTerminal = ({ messages, setMessages }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const [input, setInput] = useState('');
   const messageEndRef = useRef(null);
 
   useEffect(() => {
     setIsLoaded(true);
-    if (messageEndRef.current) {
-    messageEndRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
+        if (messages.length === 1 && !isTyping) {
+        setIsTyping(true);
+        setTimeout(() => {
+        setIsTyping(false);
+        }, 2000);
+    }
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
   const handleSend = (e) => {
@@ -23,23 +25,28 @@ const AiTerminal = () => {
     }
     if (!input.trim()) return;
     
-    // Removed .toUpperCase() so your text stays as you type it
     setMessages([...messages, { role: 'user', text: input }]);
     setInput('');
-
     setIsTyping(true);
     
     setTimeout(() => {
-      const aiResponse = { 
-        role: 'ai', 
-        text: 'Analyzing request... Access denied. Secure uplink required.' 
-      };
-      
-      setMessages(prev => [...prev, aiResponse]);
-      setIsTyping(false); // Crucial: Reset typing state to re-enable input
-    }, 800); 
-  };
+        // 1. Add the first message
+        setMessages(prev => [...prev, { 
+            role: 'ai', 
+            text: 'Analyzing request...' 
+        }]);
 
+        // 2. Wait a little longer before the final response
+        setTimeout(() => {
+            setMessages(prev => [...prev, { 
+            role: 'ai', 
+            text: 'The Ai is still being built!' 
+            }]);
+            setIsTyping(false);
+        }, 800); 
+
+        }, 800); 
+    }
   return (
     <div className={`ai-page-wrapper fade-in-section ${isLoaded ? 'is-visible' : ''}`}>
       <div className="content-width-limiter">
@@ -55,11 +62,16 @@ const AiTerminal = () => {
             {/* Space for your Pixel Portrait */}
             <div className="portrait-container">
               <div className="pixel-portrait-placeholder">
-                {/* When you have your image, replace this with: 
-                <img src="/your-pixel-art.png" alt="Angad Portrait" /> */}
-                <p>PORTRAIT_MISSING</p>
+                {/* When you have your image, replace this with: */}
+                <img 
+                src={portraitImg} 
+                alt="Angad AI Portrait" 
+                className="ai-portrait" 
+                />
               </div>
             </div>
+
+            <p className="portrait-name">Angad Ghatode</p>
 
             <div className="status-box nes-container is-dark">
               <p>SYNC: <span className="nes-text is-success">98%</span></p>
