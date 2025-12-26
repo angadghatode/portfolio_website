@@ -25,3 +25,9 @@ dist-ssr
 
 # Snyk Security Extension - AI Rules (auto-generated)
 .github/instructions/snyk_rules.instructions.md
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

@@ -1,78 +1,91 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import portraitImg from './assets/portrait.webp';
 
+// --- SUB-COMPONENT: TYPEWRITER ---
+// We define this outside the main component or wrap it properly in memo
+const Typewriter = memo(({ text }) => {
+  const [displayedText, setDisplayedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      let delay = 35;
+      const char = text[currentIndex];
+
+      // Human-like pauses
+      if (char === "." || char === "!" || char === "?") delay = 600;
+      if (char === ",") delay = 300;
+
+      const timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev + char);
+        setCurrentIndex((prev) => prev + 1);
+      }, delay + (Math.random() * 15));
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text]);
+
+  return <span style={{ whiteSpace: 'pre-wrap' }}>{displayedText}</span>;
+});
+
+// --- MAIN COMPONENT ---
 const AiTerminal = ({ messages, setMessages }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [input, setInput] = useState('');
+  
   const messageEndRef = useRef(null);
+  const inputRef = useRef(null);
 
+  // Auto-scroll logic
   useEffect(() => {
     setIsLoaded(true);
-        if (messages.length === 1 && !isTyping) {
-        setIsTyping(true);
-        setTimeout(() => {
-        setIsTyping(false);
-        }, 2000);
-    }
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  const handleSend = (e) => {
-    if (e) {
-        e.preventDefault();
-        e.stopPropagation(); 
-    }
+  const handleSend = async (e) => {
+    if (e) e.preventDefault();
     if (!input.trim()) return;
+
+    const userMessage = { role: 'user', text: input };
+    const currentInput = input;
     
-    setMessages([...messages, { role: 'user', text: input }]);
+    // Update local state immediately
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsTyping(true);
-    
-    setTimeout(() => {
-        // 1. Add the first message
-        setMessages(prev => [...prev, { 
-            role: 'ai', 
-            text: 'Analyzing request...' 
-        }]);
 
-        // 2. Wait a little longer before the final response
-        setTimeout(() => {
-            setMessages(prev => [...prev, { 
-            role: 'ai', 
-            text: 'The Ai is still being built!' 
-            }]);
-            setIsTyping(false);
-        }, 800); 
+    // Keep focus on input so user can keep typing
+    inputRef.current?.focus();
 
-        }, 800); 
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: currentInput }),
+      });
+
+      const data = await response.json();
+      setMessages((prev) => [...prev, { role: 'ai', text: data.reply }]);
+    } catch (err) {
+      setMessages((prev) => [...prev, { role: 'ai', text: "UPLINK ERROR: Connection lost." }]);
+    } finally {
+      setIsTyping(false);
+      // Ensure focus stays even after response
+      inputRef.current?.focus();
     }
+  };
+
   return (
     <div className={`ai-page-wrapper fade-in-section ${isLoaded ? 'is-visible' : ''}`}>
       <div className="content-width-limiter">
-        <div className="section-header">
-          <h2 className="nes-text is-primary section-title">AI_CORE_UPLINK</h2>
-          <div className="header-line"></div>
-        </div>
-
         <div className="ai-terminal-layout">
           <aside className="ai-sidebar">
-            <h3 className="sidebar-title">CORE STATUS</h3>
-            
-            {/* Space for your Pixel Portrait */}
+            <h3 className="sidebar-title">CORE_V2.0</h3>
             <div className="portrait-container">
-              <div className="pixel-portrait-placeholder">
-                {/* When you have your image, replace this with: */}
-                <img 
-                src={portraitImg} 
-                alt="Angad AI Portrait" 
-                className="ai-portrait" 
-                />
-              </div>
+              <img src={portraitImg} alt="Portrait" className="ai-portrait" />
             </div>
-
             <p className="portrait-name">Angad Ghatode</p>
-
             <div className="status-box nes-container is-dark">
               <p>SYNC: <span className="nes-text is-success">98%</span></p>
               <p>THREAT: <span className="nes-text is-error">LOW</span></p>
@@ -91,38 +104,40 @@ const AiTerminal = ({ messages, setMessages }) => {
           </aside>
 
           <section className="terminal-window">
-            <p className="terminal-header">AI_CORE_V2.0</p>
+            <p className="terminal-header">AI_CORE_PROFILER</p>
             <div className="chat-history">
               {messages.map((msg, i) => (
                 <div key={i} className={`bubble-row ${msg.role}`}>
                   <div className={`pixel-speech-bubble ${msg.role}`}>
-                    {msg.text}
+                    
+                    {msg.role === 'ai' && i === messages.length - 1 ? (
+                      <Typewriter text={msg.text} />
+                    ) : (
+                      <span style={{ whiteSpace: 'pre-wrap' }}>{msg.text}</span>
+                    )}
                   </div>
                 </div>
               ))}
-
               {isTyping && (
                 <div className="bubble-row ai">
                   <div className="pixel-speech-bubble ai typing-dots">
                     <span>.</span><span>.</span><span>.</span>
                   </div>
                 </div>
-
-                
               )}
               <div ref={messageEndRef} />
             </div>
 
             <form onSubmit={handleSend} className="input-zone">
               <input 
+                ref={inputRef}
                 type="text" 
                 className="nes-input is-dark" 
-                placeholder="INPUT COMMAND..." 
+                placeholder="TYPE MESSAGE..." 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                disabled={isTyping}
               />
-              <button type="submit" className="nes-btn is-primary" onClick={handleSend} >EXEC</button>
+              <button type="submit" className="nes-btn is-primary">EXEC</button>
             </form>
           </section>
         </div>
