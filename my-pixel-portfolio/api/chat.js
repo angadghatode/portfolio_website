@@ -1,6 +1,7 @@
 const OpenAI = require('openai');
 const cors = require('cors');
 require('dotenv').config();
+const express = require('express'); // Add this line
 
 const app = express();
 app.use(express.json());
@@ -137,4 +138,5 @@ app.post('/api/chat', async (req, res) => {
     res.status(500).json({ error: "Uplink Failed" });
   }
 });
+
 module.exports = app;

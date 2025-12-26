@@ -16,7 +16,18 @@
     "nes.css": "^2.3.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.11.0"
+    "react-router-dom": "^7.11.0",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "dependencies": {
+      "cors": "^2.8.5",
+      "dotenv": "^17.2.3",
+      "express": "^5.2.1",
+      "openai": "^6.15.0"
+    }
+  
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -33,4 +44,6 @@
   "overrides": {
     "vite": "npm:rolldown-vite@7.2.5"
   }
+
+  
 }
