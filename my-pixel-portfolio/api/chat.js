@@ -5,7 +5,7 @@ const express = require('express'); // Add this line
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors());            
 
 // --- MASTER PERSONA PROMPT ---
 const systemPrompt = `
@@ -112,10 +112,20 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+console.log("SERVERLESS FUNCTION INITIALIZED");
+
 app.post('/', async (req, res) => {
+  console.log("POST REQUEST RECEIVED AT /");
+  console.log("REQUEST BODY:", JSON.stringify(req.body));
   try {
     const { message } = req.body;
 
+    if (!message) {
+      console.error("ERROR: No message found in request body");
+      return res.status(400).json({ error: "Empty message" });
+    }
+
+    console.log("CALLING OPENAI API...");
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini", // UPGRADED MODEL
       messages: [
@@ -132,9 +142,11 @@ app.post('/', async (req, res) => {
       presence_penalty: 0.6, // Encourages it to be more creative/casual
     });
 
+    console.log("OPENAI RESPONSE SUCCESSFUL");
     res.json({ reply: completion.choices[0].message.content });
   } catch (error) {
     console.error(error);
+    console.error("CRITICAL ERROR IN CHAT HANDLER:", error.message);
     res.status(500).json({ error: "Uplink Failed" });
   }
 });
