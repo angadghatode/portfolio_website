@@ -27,16 +27,8 @@ function App() {
   const [chatHistory, setChatHistory] = useState([
   { 
     role: 'ai', 
-    text: "Uplink Successful. Connection to Core_v2.0 established." 
+    text: "hello!! my name is Angad Ghatode! you can ask me anything and i'll make sure to answer the best that i can :) "
   },
-  { 
-    role: 'ai', 
-    text: "I am the AI Persona of Angad Ghatode." 
-  },
-  { 
-    role: 'ai', 
-    text: "I've been programmed with his technical expertise and project data. You may ask me anything about his work, skills, or experience." 
-  }
 ]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);

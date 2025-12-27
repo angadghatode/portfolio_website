@@ -447,7 +447,7 @@ html, body, #root {
   .content-width-limiter { width: 90%; }
   .section-title { font-size: 1.2rem !important; }
   
-  .arsenal-layout { padding: 20px; align-items: flex-start; }
+  .arsenal-layout { padding: 20px; align-items: flex-start; gap: 0px }
   .arsenal-grid {
     display: flex; /* Changed from grid back to flex */
     justify-content: center; /* Centers the small chips on mobile */
@@ -458,6 +458,14 @@ html, body, #root {
     font-size: 1rem;
     width: auto; /* Ensure they don't take full width on mobile */
   }
+
+  .nes-textarea.is-dark.is-dark{
+    height: 150px;
+    font-size: 10px;
+    padding: 4px;
+  }
+
+  
 }
 
 @media (max-width: 480px) {
@@ -489,6 +497,7 @@ html, body, #root {
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100dvh;
   padding-top: 100px;
   padding-bottom: 100px;
   background-image: 
@@ -675,9 +684,83 @@ html, body, #root {
 @media (max-width: 768px) {
   .ai-terminal-layout {
     grid-template-columns: 1fr;
+    font-size: 12px; 
+    gap: 0.5rem;
+    
   }
-  .ai-sidebar {
-    display: none; /* Focus strictly on chat for mobile */
+
+  .nes-container.is-dark, .data-visualizer{
+    display: none;
+  }
+
+  .ai-page-wrapper {
+    height: 100dvh; /* 'dvh' is essential for mobile browser bars */
+    overflow: hidden;
+    padding-top: 20px;
+  }
+
+  .terminal-window {
+    border: 4px solid var(--accent-blue);
+    background: var(--bg-card);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    position: relative;
+}
+
+.footer-bar {
+    text-align: center;
+    padding: 5px;
+    background-color: var(--bg-contrast);
+    border-top: 4px solid var(--accent-pink);
+    color: var(--text-muted);
+    padding-top: 15px;
+    font-size: 0.45rem;
+}
+  /*.ai-sidebar {
+    display: none; /* Focus strictly on chat for mobile 
+  }*/
+
+  .terminal-header {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+
+  .mission-body {
+    padding: 30px;
+    font-size: 13px;
+  }
+
+  .mission-title {
+    font-size: 15px;
+  }
+
+
+  .input-zone {
+    gap: 5px;
+  }
+
+  .pixel-speech-bubble {
+    padding: 8px 12px;
+    font-size: 11px;
+    line-height: 1.9;
+  }
+
+  .nes-input.is-dark {
+    padding: 4px 8px;
+    font-size: 10px; /* Slightly larger for readability/focus */
+    
+  }
+
+  .nes-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  /* 5. Reduce padding in the chat history to fit more text */
+  .chat-history {
+    padding: 10px;
   }
 }
 
