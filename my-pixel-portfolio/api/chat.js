@@ -1,7 +1,6 @@
-const OpenAI = require('openai');
-const cors = require('cors');
-require('dotenv').config();
-const express = require('express'); // Add this line
+import OpenAI from 'openai';
+import cors from 'cors';
+import express from 'express';
 
 const app = express();
 app.use(express.json());
@@ -151,4 +150,4 @@ app.post('/', async (req, res) => {
   }
 });
 
-module.exports = app;
+export default app;
