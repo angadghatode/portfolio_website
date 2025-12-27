@@ -57,7 +57,7 @@ const AiTerminal = ({ messages, setMessages }) => {
     inputRef.current?.focus();
 
     try {
-      const response = await fetch('https://angad-ai-backend.vercel.app/api/chat', {
+      const response = await fetch('https://angad-ai-backend.vercel.app/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: currentInput }),
