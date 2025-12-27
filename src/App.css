@@ -702,22 +702,17 @@ html, body, #root {
   .terminal-window {
     border: 4px solid var(--accent-blue);
     background: var(--bg-card);
-    padding: 15px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    height: 500px;
-    position: relative;
-}
+    flex: 1;
+    min-height: 0; /* CRITICAL for mobile flex scrolling */
+    height: auto;
+  }
 
-.footer-bar {
-    text-align: center;
-    padding: 5px;
-    background-color: var(--bg-contrast);
-    border-top: 4px solid var(--accent-pink);
-    color: var(--text-muted);
-    padding-top: 15px;
-    font-size: 0.45rem;
-}
+  .footer-bar {
+    display: none;
+  }
   /*.ai-sidebar {
     display: none; /* Focus strictly on chat for mobile 
   }*/
@@ -738,7 +733,10 @@ html, body, #root {
 
 
   .input-zone {
-    gap: 5px;
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-shrink: 0;
   }
 
   .pixel-speech-bubble {
@@ -748,19 +746,25 @@ html, body, #root {
   }
 
   .nes-input.is-dark {
-    padding: 4px 8px;
-    font-size: 10px; /* Slightly larger for readability/focus */
-    
+    font-size: 16px !important;
+    transform: scale(0.75);
+    transform-origin: left center;
+    width: 250px;
   }
 
   .nes-btn {
-    padding: 4px 8px;
-    font-size: 10px;
+    padding: 6px 12px;
+    font-size: 11px;
+    white-space: nowrap;
   }
 
   /* 5. Reduce padding in the chat history to fit more text */
   .chat-history {
+    flex: 1;
+    overflow-y: auto;
     padding: 10px;
+    min-height: 0; /* prevents flex overflow bugs on iOS */
+    -webkit-overflow-scrolling: touch;
   }
 }
 
