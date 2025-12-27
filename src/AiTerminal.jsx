@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef, memo } from 'react';
 import portraitImg from './assets/portrait.webp';
 
-// --- SUB-COMPONENT: TYPEWRITER ---
-// We define this outside the main component or wrap it properly in memo
 const Typewriter = memo(({ text }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -59,7 +57,7 @@ const AiTerminal = ({ messages, setMessages }) => {
     inputRef.current?.focus();
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('https://angad-ai-backend.vercel.app/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: currentInput }),
