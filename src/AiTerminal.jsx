@@ -86,8 +86,8 @@ const AiTerminal = ({ messages, setMessages }) => {
             <p className="portrait-name">Angad Ghatode</p>
             <div className="status-box nes-container is-dark">
               <p>SYNC: <span className="nes-text is-success">98%</span></p>
-              <p>THREAT: <span className="nes-text is-error">LOW</span></p>
-              <p>UPLINK: <span className="nes-text is-primary">STABLE</span></p>
+              <p>RESPONSE TIME: <span className="nes-text is-error">LOW</span></p>
+              <p>STATUS: <span className="nes-text is-primary">AVAILABLE</span></p>
             </div>
 
             <div className="data-visualizer">
@@ -97,7 +97,7 @@ const AiTerminal = ({ messages, setMessages }) => {
                 <div className="bar" style={{ height: '50%', background: '#22c55e' }}></div>
                 <div className="bar" style={{ height: '90%', background: '#f472b6' }}></div>
               </div>
-              <p className="visualizer-label">GLOBAL NETWORK</p>
+              <p className="visualizer-label">REQUESTS</p>
             </div>
           </aside>
 
