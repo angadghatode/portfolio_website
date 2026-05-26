@@ -79,15 +79,15 @@ const AiTerminal = ({ messages, setMessages }) => {
       <div className="content-width-limiter">
         <div className="ai-terminal-layout">
           <aside className="ai-sidebar">
-            <h3 className="sidebar-title">CORE_V2.0</h3>
+            <h3 className="sidebar-title">DIGITAL TWIN</h3>
             <div className="portrait-container">
               <img src={portraitImg} alt="Portrait" className="ai-portrait" />
             </div>
             <p className="portrait-name">Angad Ghatode</p>
             <div className="status-box nes-container is-dark">
               <p>SYNC: <span className="nes-text is-success">98%</span></p>
-              <p>THREAT: <span className="nes-text is-error">LOW</span></p>
-              <p>UPLINK: <span className="nes-text is-primary">STABLE</span></p>
+              <p>RESPONSE TIME: <span className="nes-text is-error">LOW</span></p>
+              <p>CONNECTION: <span className="nes-text is-primary">STABLE</span></p>
             </div>
 
             <div className="data-visualizer">
@@ -97,12 +97,12 @@ const AiTerminal = ({ messages, setMessages }) => {
                 <div className="bar" style={{ height: '50%', background: '#22c55e' }}></div>
                 <div className="bar" style={{ height: '90%', background: '#f472b6' }}></div>
               </div>
-              <p className="visualizer-label">GLOBAL NETWORK</p>
+              <p className="visualizer-label">MESSAGES</p>
             </div>
           </aside>
 
           <section className="terminal-window">
-            <p className="terminal-header">AI_CORE_PROFILER</p>
+            <p className="terminal-header">AI DIGITAL TWIN</p>
             <div className="chat-history">
               {messages.map((msg, i) => (
                 <div key={i} className={`bubble-row ${msg.role}`}>

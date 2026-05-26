@@ -69,7 +69,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [dataPacket, setDataPacket] = useState('');
   const [submitStatus, setSubmitStatus] = useState('IDLE');
-  const [statusMessage, setStatusMessage] = useState('READY FOR TRANSMISSION.');
+  const [statusMessage, setStatusMessage] = useState('READY FOR MESSAGE.');
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -81,12 +81,12 @@ function App() {
     e.preventDefault();
     if (!operator.trim() || !email.trim() || !dataPacket.trim()) {
       setSubmitStatus('ERROR');
-      setStatusMessage('ERROR: NAME, RETURN ADDRESS & DATA PACKET ARE REQUIRED.');
+      setStatusMessage('ERROR: NAME, EMAIL & MESSAGE IS REQUIRED.');
       return;
     }
 
     setSubmitStatus('SENDING');
-    setStatusMessage('TRANSMITTING DATA PACKET TO UPLINK SERVER...');
+    setStatusMessage('TRANSMITTING MESSAGE TO ANGAD GHATODE...');
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -153,7 +153,7 @@ function App() {
       <div className="app-holder">
         {/* 1. PERSISTENT NAV */}
         <nav className="nes-container sticky-nav">
-          <Link to="/" className="nav-brand" onClick={() => setIsMenuOpen(false)}>ANGAD_v2.0</Link>
+          <Link to="/" className="nav-brand" onClick={() => setIsMenuOpen(false)}>ANGAD GHATODE</Link>
           <button type="button" className="nes-btn is-primary menu-toggle-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? "X" : "≡"}
           </button>
@@ -162,7 +162,7 @@ function App() {
             <Link to="/ai" className="nav-ai-link" onClick={() => setIsMenuOpen(false)}>
               <span className="ai-pulse-dot"></span>AI_CORE
             </Link>
-            <Link to="/" onClick={() => {
+            <Link to="/" onClick={() => { 
               setIsMenuOpen(false);
               setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 100);
             }}>CONTACT</Link>
@@ -215,7 +215,7 @@ function App() {
                           <span className="ai-preview-dots">
                             <span></span><span></span><span></span>
                           </span>
-                          <span className="ai-preview-title">AI_CORE_PROFILER</span>
+                          <span className="ai-preview-title">AI DIGITAL TWIN</span>
                         </div>
                         <TypingDemo />
                       </div>
@@ -226,7 +226,7 @@ function App() {
                 {/* ═══════ PROJECT QUEST ═══════ */}
                 <section id="quests" className="portfolio-section hidden-reveal">
                   <div className="section-header">
-                    <h2 className="nes-text is-primary section-title">ACTIVE QUESTS</h2>
+                    <h2 className="nes-text is-primary section-title">PROJECTS</h2>
                     <div className="header-line"></div>
                   </div>
                   <div className="mission-grid">
@@ -241,7 +241,7 @@ function App() {
                         <div className="mission-tech-tags">
                           <span>PixiJS</span><span>Vanilla JS</span><span>HTML5 Canvas</span><span>Vite</span>
                         </div>
-                        <a href="https://myparallel.com.au" target="_blank" rel="noopener noreferrer" className="nes-btn is-primary" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '15px' }}>LAUNCH CO-OP</a>
+                        <a href="https://myparallel.com.au" target="_blank" rel="noopener noreferrer" className="nes-btn is-primary" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '15px' }}>CHECK IT OUT!</a>
                       </div>
                     </div>
                   </div>
@@ -250,7 +250,7 @@ function App() {
                 {/* ═══════ EXPANDED TECH ARSENAL ═══════ */}
                 <section id="skills" className="portfolio-section hidden-reveal">
                   <div className="section-header">
-                    <h2 className="nes-text is-warning section-title">TECH ARSENAL</h2>
+                    <h2 className="nes-text is-warning section-title">TECH STACK</h2>
                     <div className="header-line" style={{ background: 'linear-gradient(90deg, #f7d51d, transparent)' }}></div>
                   </div>
 
@@ -274,7 +274,7 @@ function App() {
                 {/* ═══════ CONTACT UPLINK — Full-width redesign ═══════ */}
                 <section id="contact" className="uplink-section hidden-reveal">
                   <div className="section-header">
-                    <h2 className="nes-text is-error section-title">UPLINK</h2>
+                    <h2 className="nes-text is-error section-title">CONTACT</h2>
                     <div className="header-line" style={{ background: 'linear-gradient(90deg, var(--status-error), transparent)' }}></div>
                   </div>
 
@@ -282,7 +282,7 @@ function App() {
                     {/* Left — Info + Socials */}
                     <div className="uplink-info-panel">
                       <div className="uplink-info-block">
-                        <h3 className="uplink-info-label">DIRECT CHANNELS</h3>
+                        <h3 className="uplink-info-label">DIRECT CONTACT</h3>
                         <a href="mailto:angad.ghatode@gmail.com" className="uplink-channel-link">
                           <span className="channel-icon">✉</span>
                           <span>angad.ghatode@gmail.com</span>
@@ -314,8 +314,7 @@ function App() {
                     {/* Right — Form */}
                     <div className="uplink-form-panel">
                       <div className="uplink-form-header">
-                        <span className="rec-light">● REC</span>
-                        <span className="uplink-form-title">TRANSMISSION CONSOLE</span>
+                        <span className="uplink-form-title">CONTACT PAGE</span>
                       </div>
                       <p className={`uplink-status-msg ${submitStatus === 'ERROR' ? 'status-error' :
                         submitStatus === 'SUCCESS' ? 'status-success' :
@@ -324,7 +323,7 @@ function App() {
                       <form onSubmit={handleUpload} className="uplink-form">
                         <div className="uplink-field-row">
                           <div className="uplink-field">
-                            <label>OPERATOR</label>
+                            <label>NAME</label>
                             <input
                               type="text"
                               className="nes-input is-dark"
@@ -336,7 +335,7 @@ function App() {
                             />
                           </div>
                           <div className="uplink-field">
-                            <label>RETURN ADDRESS</label>
+                            <label>EMAIL</label>
                             <input
                               type="email"
                               className="nes-input is-dark"
@@ -349,7 +348,7 @@ function App() {
                           </div>
                         </div>
                         <div className="uplink-field">
-                          <label>DATA PACKET</label>
+                          <label>MESSAGE</label>
                           <textarea
                             className="nes-textarea is-dark"
                             placeholder="Type your message..."
@@ -364,7 +363,7 @@ function App() {
                           className={`nes-btn ${submitStatus === 'SENDING' ? 'is-disabled' : 'is-error'} uplink-submit-btn`}
                           disabled={submitStatus === 'SENDING'}
                         >
-                          {submitStatus === 'SENDING' ? 'TRANSMITTING...' : 'INITIATE UPLOAD'}
+                          {submitStatus === 'SENDING' ? 'TRANSMITTING...' : 'SEND MESSAGE'}
                         </button>
                       </form>
                     </div>
@@ -379,7 +378,7 @@ function App() {
 
         {/* 4. PERSISTENT FOOTER */}
         <footer className="footer-bar">
-          <p>SYSTEM SHUTDOWN // © 2025 ANGAD GHATODE</p>
+          <p>PORTFOLIO WEBSITE // © 2025 ANGAD GHATODE</p>
           <p>Made and Designed by Angad Ghatode</p>
         </footer>
       </div>
