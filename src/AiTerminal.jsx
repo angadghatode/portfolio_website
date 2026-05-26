@@ -31,7 +31,7 @@ const AiTerminal = ({ messages, setMessages }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [input, setInput] = useState('');
-  
+
   const messageEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -47,7 +47,7 @@ const AiTerminal = ({ messages, setMessages }) => {
 
     const userMessage = { role: 'user', text: input };
     const currentInput = input;
-    
+
     // Update local state immediately
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
@@ -92,10 +92,10 @@ const AiTerminal = ({ messages, setMessages }) => {
 
             <div className="data-visualizer">
               <div className="bar-graph">
-                <div className="bar" style={{height: '40%', background: '#ff4b2b'}}></div>
-                <div className="bar" style={{height: '70%', background: '#38bdf8'}}></div>
-                <div className="bar" style={{height: '50%', background: '#22c55e'}}></div>
-                <div className="bar" style={{height: '90%', background: '#f472b6'}}></div>
+                <div className="bar" style={{ height: '40%', background: '#ff4b2b' }}></div>
+                <div className="bar" style={{ height: '70%', background: '#38bdf8' }}></div>
+                <div className="bar" style={{ height: '50%', background: '#22c55e' }}></div>
+                <div className="bar" style={{ height: '90%', background: '#f472b6' }}></div>
               </div>
               <p className="visualizer-label">GLOBAL NETWORK</p>
             </div>
@@ -107,7 +107,7 @@ const AiTerminal = ({ messages, setMessages }) => {
               {messages.map((msg, i) => (
                 <div key={i} className={`bubble-row ${msg.role}`}>
                   <div className={`pixel-speech-bubble ${msg.role}`}>
-                    
+
                     {msg.role === 'ai' && i === messages.length - 1 ? (
                       <Typewriter text={msg.text} />
                     ) : (
@@ -127,11 +127,11 @@ const AiTerminal = ({ messages, setMessages }) => {
             </div>
 
             <form onSubmit={handleSend} className="input-zone">
-              <input 
+              <input
                 ref={inputRef}
-                type="text" 
-                className="nes-input is-dark" 
-                placeholder="TYPE MESSAGE..." 
+                type="text"
+                className="nes-input is-dark"
+                placeholder="TYPE MESSAGE..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />
