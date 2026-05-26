@@ -226,7 +226,7 @@ function App() {
                 {/* ═══════ PROJECT QUEST ═══════ */}
                 <section id="quests" className="portfolio-section hidden-reveal">
                   <div className="section-header">
-                    <h2 className="nes-text is-primary section-title">PROJECTS</h2>
+                    <h2 className="nes-text is-primary section-title">ACTIVE QUESTS</h2>
                     <div className="header-line"></div>
                   </div>
                   <div className="mission-grid">
@@ -241,7 +241,7 @@ function App() {
                         <div className="mission-tech-tags">
                           <span>PixiJS</span><span>Vanilla JS</span><span>HTML5 Canvas</span><span>Vite</span>
                         </div>
-                        <a href="https://myparallel.com.au" target="_blank" rel="noopener noreferrer" className="nes-btn is-primary" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '15px' }}>CHECK IT OUT HERE</a>
+                        <a href="https://myparallel.com.au" target="_blank" rel="noopener noreferrer" className="nes-btn is-primary" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '15px' }}>LAUNCH CO-OP</a>
                       </div>
                     </div>
                   </div>
@@ -250,7 +250,7 @@ function App() {
                 {/* ═══════ EXPANDED TECH ARSENAL ═══════ */}
                 <section id="skills" className="portfolio-section hidden-reveal">
                   <div className="section-header">
-                    <h2 className="nes-text is-warning section-title">TECH STACK</h2>
+                    <h2 className="nes-text is-warning section-title">TECH ARSENAL</h2>
                     <div className="header-line" style={{ background: 'linear-gradient(90deg, #f7d51d, transparent)' }}></div>
                   </div>
 
@@ -274,7 +274,7 @@ function App() {
                 {/* ═══════ CONTACT UPLINK — Full-width redesign ═══════ */}
                 <section id="contact" className="uplink-section hidden-reveal">
                   <div className="section-header">
-                    <h2 className="nes-text is-error section-title">CONTACT</h2>
+                    <h2 className="nes-text is-error section-title">UPLINK</h2>
                     <div className="header-line" style={{ background: 'linear-gradient(90deg, var(--status-error), transparent)' }}></div>
                   </div>
 
@@ -303,6 +303,7 @@ function App() {
 
                       <div className="uplink-info-block">
                         <h3 className="uplink-info-label">SIGNAL STATUS</h3>
+                        <div className="signal-row"><span>UPLINK</span><span className="nes-text is-success">STABLE</span></div>
                         <div className="signal-row"><span>RESPONSE TIME</span><span className="nes-text is-primary">{'<'} 24H</span></div>
                         <div className="signal-row"><span>AVAILABILITY</span><span className="nes-text is-warning">OPEN</span></div>
                       </div>
@@ -313,7 +314,8 @@ function App() {
                     {/* Right — Form */}
                     <div className="uplink-form-panel">
                       <div className="uplink-form-header">
-                        <span className="uplink-form-title">LEAVE A MESSAGE</span>
+                        <span className="rec-light">● REC</span>
+                        <span className="uplink-form-title">TRANSMISSION CONSOLE</span>
                       </div>
                       <p className={`uplink-status-msg ${submitStatus === 'ERROR' ? 'status-error' :
                         submitStatus === 'SUCCESS' ? 'status-success' :
@@ -322,7 +324,7 @@ function App() {
                       <form onSubmit={handleUpload} className="uplink-form">
                         <div className="uplink-field-row">
                           <div className="uplink-field">
-                            <label>NAME</label>
+                            <label>OPERATOR</label>
                             <input
                               type="text"
                               className="nes-input is-dark"
@@ -334,7 +336,7 @@ function App() {
                             />
                           </div>
                           <div className="uplink-field">
-                            <label>EMAIL</label>
+                            <label>RETURN ADDRESS</label>
                             <input
                               type="email"
                               className="nes-input is-dark"
@@ -347,7 +349,7 @@ function App() {
                           </div>
                         </div>
                         <div className="uplink-field">
-                          <label>MESSAGE</label>
+                          <label>DATA PACKET</label>
                           <textarea
                             className="nes-textarea is-dark"
                             placeholder="Type your message..."
@@ -362,7 +364,7 @@ function App() {
                           className={`nes-btn ${submitStatus === 'SENDING' ? 'is-disabled' : 'is-error'} uplink-submit-btn`}
                           disabled={submitStatus === 'SENDING'}
                         >
-                          {submitStatus === 'SENDING' ? 'TRANSMITTING...' : 'SEND'}
+                          {submitStatus === 'SENDING' ? 'TRANSMITTING...' : 'INITIATE UPLOAD'}
                         </button>
                       </form>
                     </div>

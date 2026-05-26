@@ -874,7 +874,6 @@ body,
   display: flex;
   flex-direction: column;
   height: 100dvh;
-  overflow: hidden;
   padding-top: 80px;
   padding-bottom: 60px;
   background-image:
@@ -883,20 +882,12 @@ body,
   background-size: 50px 50px;
 }
 
-.ai-page-wrapper .content-width-limiter {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .ai-terminal-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 20px;
   margin-top: 30px;
   align-items: stretch;
-  flex: 1;
-  min-height: 0;
 }
 
 .ai-sidebar {
@@ -954,8 +945,6 @@ body,
   display: flex;
   flex-direction: column;
   position: relative;
-  flex: 1;
-  min-height: 0;
 }
 
 .terminal-header {
@@ -973,7 +962,6 @@ body,
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  min-height: 0;
 }
 
 .bubble-row {
@@ -1078,11 +1066,9 @@ body,
 @media (max-width: 768px) {
   .ai-terminal-layout {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
     font-size: 12px;
     gap: 0.5rem;
-    flex: 1;
-    min-height: 0;
+
   }
 
   /* On mobile: stack layout, hide data-visualizer and status-box only */
@@ -1096,12 +1082,22 @@ body,
   }
 
   .ai-page-wrapper {
-    padding-top: 20px;
+    height: 100dvh;
+    overflow: hidden;
+    padding-top: 70px;
     padding-bottom: 0;
   }
 
   .terminal-window {
+    border: 4px solid var(--accent-blue);
+    background: var(--bg-card);
     padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    /* CRITICAL for mobile flex scrolling */
+    height: auto;
   }
 
   .footer-bar {
