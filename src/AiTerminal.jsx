@@ -4,11 +4,12 @@ import portraitImg from './assets/portrait.webp';
 const Typewriter = memo(({ text }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const safeText = typeof text === "string" ? text : "";
 
   useEffect(() => {
-    if (currentIndex < text.length) {
+    if (currentIndex < safeText.length) {
       let delay = 35;
-      const char = text[currentIndex];
+      const char = safeText[currentIndex];
 
       // Human-like pauses
       if (char === "." || char === "!" || char === "?") delay = 600;
@@ -21,7 +22,7 @@ const Typewriter = memo(({ text }) => {
 
       return () => clearTimeout(timeout);
     }
-  }, [currentIndex, text]);
+  }, [currentIndex, safeText]);
 
   return <span style={{ whiteSpace: 'pre-wrap' }}>{displayedText}</span>;
 });
@@ -64,7 +65,43 @@ const AiTerminal = ({ messages, setMessages }) => {
       });
 
       const data = await response.json();
-      setMessages((prev) => [...prev, { role: 'ai', text: data.reply }]);
+      const errorType = typeof data?.error === 'string'
+        ? data.error
+        : data?.error?.type ?? data?.error?.code;
+      if (
+        errorType === 'insufficient_quota' ||
+        errorType === 'billing_not_active' ||
+        (response.status === 429 &&
+          errorType !== 'daily_limit' &&
+          errorType !== 'hourly_limit')
+      ) {
+        setMessages((prev) => [...prev, {
+          role: 'ai',
+          text: 'AI CREDIT LIMIT REACHED. PLEASE TRY AGAIN LATER.',
+        }]);
+      } else if (response.status === 429 && errorType === 'daily_limit') {
+        setMessages((prev) => [...prev, {
+          role: 'ai',
+          text: 'DAILY CHAT LIMIT REACHED. PLEASE TRY AGAIN TOMORROW.',
+        }]);
+      } else if (response.status === 429 && errorType === 'hourly_limit') {
+        setMessages((prev) => [...prev, {
+          role: 'ai',
+          text: 'CHAT RATE LIMIT REACHED. PLEASE TRY AGAIN IN AN HOUR.',
+        }]);
+      } else if (!response.ok) {
+        setMessages((prev) => [...prev, {
+          role: 'ai',
+          text: 'AI SERVICE ERROR: Please try again later.',
+        }]);
+      } else if (typeof data?.reply === 'string' && data.reply.trim()) {
+        setMessages((prev) => [...prev, { role: 'ai', text: data.reply }]);
+      } else {
+        setMessages((prev) => [...prev, {
+          role: 'ai',
+          text: 'AI SERVICE ERROR: Received an invalid response.',
+        }]);
+      }
     } catch (err) {
       setMessages((prev) => [...prev, { role: 'ai', text: "UPLINK ERROR: Connection lost." }]);
     } finally {
@@ -132,6 +169,7 @@ const AiTerminal = ({ messages, setMessages }) => {
                 type="text"
                 className="nes-input is-dark"
                 placeholder="TYPE MESSAGE..."
+                maxLength={1000}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />

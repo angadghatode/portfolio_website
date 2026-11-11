@@ -37,7 +37,15 @@ To run this system locally:
     npm run dev
     ```
 
-4.  **Deploy to GitHub Pages**
+4.  **Configure the contact form**
+
+    Get an access key from [Web3Forms](https://web3forms.com/), then set
+    `VITE_WEB3FORMS_ACCESS_KEY` in a local `.env` file (see `.env.example`).
+    Add the same variable to the Vercel project's Environment Variables for
+    each deployment environment, then redeploy. Vite embeds `VITE_` variables
+    in the client bundle; Web3Forms access keys are designed to be public.
+
+5.  **Deploy to GitHub Pages**
     ```bash
     npm run deploy
     ```

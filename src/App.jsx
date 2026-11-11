@@ -79,6 +79,13 @@ function App() {
 
   const handleUpload = async (e) => {
     e.preventDefault();
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY?.trim();
+    if (!accessKey) {
+      setSubmitStatus('ERROR');
+      setStatusMessage('ERROR: CONTACT FORM IS NOT CONFIGURED. PLEASE EMAIL ME DIRECTLY.');
+      return;
+    }
+
     if (!operator.trim() || !email.trim() || !dataPacket.trim()) {
       setSubmitStatus('ERROR');
       setStatusMessage('ERROR: NAME, EMAIL & MESSAGE IS REQUIRED.');
@@ -93,28 +100,32 @@ function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE",
-          name: operator,
-          email: email,
-          message: dataPacket,
+          access_key: accessKey,
+          name: operator.trim(),
+          email: email.trim(),
+          message: dataPacket.trim(),
+          replyto: email.trim(),
+          from_name: 'Angad Ghatode Portfolio',
           subject: `New Portfolio Message from ${operator}`
         })
       });
 
-      const data = await response.json();
-      if (response.ok && data.success) {
+      const data = await response.json().catch(() => null);
+      if (response.ok && data?.success) {
         setSubmitStatus('SUCCESS');
         setStatusMessage('TRANSMISSION SUCCESSFUL! PACKET RECEIVED.');
         setOperator('');
         setEmail('');
         setDataPacket('');
       } else {
-        throw new Error(data.message || 'Transmission failed.');
+        console.error('Web3Forms rejected the contact submission:', data?.message || response.status);
+        setSubmitStatus('ERROR');
+        setStatusMessage('TRANSMISSION FAILED. PLEASE EMAIL ME DIRECTLY.');
       }
     } catch (err) {
-      console.error(err);
+      console.error('Contact form request failed:', err);
       setSubmitStatus('ERROR');
-      setStatusMessage(`TRANSMISSION FAILED: ${err.message.toUpperCase()}`);
+      setStatusMessage('TRANSMISSION FAILED. CHECK YOUR CONNECTION OR EMAIL ME DIRECTLY.');
     }
   };
 
@@ -206,7 +217,7 @@ function App() {
                         I trained an AI on my skills, projects, and experience. Ask it anything — about my work, my tech stack, or what I can build for you. It responds in real-time, just like a conversation.
                       </p>
                       <Link to="/ai" className="nes-btn is-primary ai-showcase-cta">
-                        ▶ LAUNCH AI_CORE
+                        LAUNCH AI_CORE!
                       </Link>
                     </div>
                     <div className="ai-showcase-preview">
@@ -229,6 +240,7 @@ function App() {
                     <h2 className="nes-text is-primary section-title">PROJECTS</h2>
                     <div className="header-line"></div>
                   </div>
+
                   <div className="mission-grid">
                     <div className="mission-card hidden-reveal">
                       <div className="mission-header">
@@ -245,7 +257,61 @@ function App() {
                       </div>
                     </div>
                   </div>
+
+                  <div className="mission-grid">
+                    <div className="mission-card hidden-reveal">
+                      <div className="mission-header">
+                        <h3 className="mission-title">CFC WINTER PROJECT | UWA AGRONOMY CLUB</h3>
+                        <span className="mission-id">ID: #002</span>
+                      </div>
+                      <div className="mission-body">
+                        <p style={{ marginBottom: '15px' }}><span className="status-indicator"></span>Status: ONLINE</p>
+                        <p style={{ marginBottom: '20px' }}>I helped collaborate on the front-end development of the CFC Winter project focused on rebuilding the UWA Agronomy Club website.</p>
+                        <div className="mission-tech-tags">
+                          <span>Next.js</span><span>Figma</span><span>Django</span><span>TypeScript</span><span>Python</span>
+                        </div>
+                        <a href="https://www.agronomyclub.org" target="_blank" rel="noopener noreferrer" className="nes-btn is-primary" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '15px' }}>CHECK IT OUT!</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mission-grid">
+                    <div className="mission-card hidden-reveal">
+                      <div className="mission-header">
+                        <h3 className="mission-title">CFC HACKATHON 2026 | 1st Place </h3>
+                        <span className="mission-id">ID: #003</span>
+                      </div>
+                      <div className="mission-body">
+                        <p style={{ marginBottom: '15px' }}><span className="status-indicator-idle"></span>Status: IDLE</p>
+                        <p style={{ marginBottom: '20px' }}>We spent the three days tackling a massive challenge: how do we protect Western Australia’s unique biodiversity and ecosystem liveability while our cities keep growing? We wanted to target the increasing isolation of kids from nature, so our answer was to turn conservation into a literal adventure. We built a Pokémon GO inspired game that gets young people outside and actively engaged with their local environment! </p>
+                        <div className="mission-tech-tags">
+                        </div>
+                        <a href="https://www.linkedin.com/posts/angadghatode_hackathon-codeforconservation-techforgood-activity-7505056513833488384-8o0N?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFgZRZMBfRunbZVG4ZQAWCZ9IzniMywHqj4" target="_blank" rel="noopener noreferrer" className="nes-btn is-primary" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '15px' }}>CHECK IT OUT!</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ═══════ project template for future use 
+                  <div className="mission-grid">
+                    <div className="mission-card hidden-reveal">
+                      <div className="mission-header">
+                        <h3 className="mission-title">CFC HACKATHON 2026 | 1st Place </h3>
+                        <span className="mission-id">ID: #003</span>
+                      </div>
+                      <div className="mission-body">
+                        <p style={{ marginBottom: '15px' }}><span className="status-indicator"></span>Status: ONLINE</p>
+                        <p style={{ marginBottom: '20px' }}>We spent the three days tackling a massive challenge: how do we protect Western Australia’s unique biodiversity and ecosystem liveability while our cities keep growing? We wanted to target the increasing isolation of kids from nature, so our answer was to turn conservation into a literal adventure. We built a Pokémon GO inspired game that gets young people outside and actively engaged with their local environment! </p>
+                        <div className="mission-tech-tags">
+                        </div>
+                        <a href="https://www.linkedin.com/posts/angadghatode_hackathon-codeforconservation-techforgood-activity-7505056513833488384-8o0N?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFgZRZMBfRunbZVG4ZQAWCZ9IzniMywHqj4" target="_blank" rel="noopener noreferrer" className="nes-btn is-primary" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '15px' }}>CHECK IT OUT!</a>
+                      </div>
+                    </div>
+                  </div> 
+                  ═══════ */}
+
                 </section>
+
+                
 
                 {/* ═══════ EXPANDED TECH ARSENAL ═══════ */}
                 <section id="skills" className="portfolio-section hidden-reveal">
@@ -293,11 +359,15 @@ function App() {
                         </a>
                         <a href="https://github.com/angadghatode" target="_blank" rel="noopener noreferrer" className="uplink-channel-link">
                           <span className="channel-icon">◆</span>
-                          <span>github.com/angadghatode</span>
+                          <span>Github</span>
                         </a>
                         <a href="https://linkedin.com/in/angadghatode" target="_blank" rel="noopener noreferrer" className="uplink-channel-link">
                           <span className="channel-icon">■</span>
-                          <span>linkedin.com/in/angadghatode</span>
+                          <span>Linkedin</span>
+                        </a>
+                        <a href="https://x.com/angadghatode" target="_blank" rel="noopener noreferrer" className="uplink-channel-link">
+                          <span className="channel-icon">■</span>
+                          <span>X / Twitter</span>
                         </a>
                       </div>
 
@@ -378,7 +448,7 @@ function App() {
 
         {/* 4. PERSISTENT FOOTER */}
         <footer className="footer-bar">
-          <p>PORTFOLIO WEBSITE // © 2025 ANGAD GHATODE</p>
+          <p>PORTFOLIO WEBSITE // © 2026 ANGAD GHATODE</p>
           <p>Made and Designed by Angad Ghatode</p>
         </footer>
       </div>

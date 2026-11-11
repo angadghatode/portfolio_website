@@ -14,6 +14,7 @@
   --border-glow: rgba(139, 92, 246, 0.6);
   --status-success: #22C55E;
   --status-error: #FB7185;
+  --status-idle: #8623d7;
 }
 
 * {
@@ -343,6 +344,7 @@ body,
   position: relative;
   transition: all 0.3s ease;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .mission-card:hover {
@@ -382,6 +384,19 @@ body,
   background-color: var(--status-success);
   margin-right: 10px;
   box-shadow: 0 0 8px var(--status-success);
+}
+
+.status-indicator-idle {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--status-idle);
+  margin-right: 10px;
+  box-shadow: 0 0 8px var(--status-idle);
+}
+
+.mission-status-idle {
+  color: var(--status-idle);
 }
 
 .arsenal-layout {
